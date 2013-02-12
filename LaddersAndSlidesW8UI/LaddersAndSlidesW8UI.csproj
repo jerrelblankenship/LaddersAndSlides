@@ -109,6 +109,9 @@
     <Compile Include="Pages\EntryPage.xaml.cs">
       <DependentUpon>EntryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GameSetup.xaml.cs">
+      <DependentUpon>GameSetup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +123,8 @@
   <ItemGroup>
     <Content Include="Assets\GameArtifacts\Arrow.png" />
     <Content Include="Assets\GameArtifacts\chutesAndLadders.png" />
+    <Content Include="Assets\GameArtifacts\chutesAndLadders2.png" />
+    <Content Include="Assets\GameArtifacts\MainScreen.png" />
     <Content Include="Assets\GameArtifacts\Spinner.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\Players\Blue-Monster.png" />
@@ -142,6 +147,10 @@
     <Page Include="Pages\EntryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GameSetup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
