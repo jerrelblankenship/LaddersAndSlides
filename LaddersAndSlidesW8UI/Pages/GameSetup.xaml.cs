@@ -34,5 +34,26 @@ namespace LaddersAndSlidesW8UI.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        private void PlayerSelection_OnClick(object sender, RoutedEventArgs e)
+        {
+            var buttonName = ((Button) e.OriginalSource).Name;
+            var numberOfPlayers = 1;
+
+            switch (buttonName)
+            {
+                case "_twoPlayer":
+                    numberOfPlayers = 2;
+                    break;
+                case "_threePlayer":
+                    numberOfPlayers = 3;
+                    break;
+                case "_fourPlayer":
+                    numberOfPlayers = 4;
+                    break;
+            }
+
+            Frame.Navigate(typeof (Game), numberOfPlayers);
+        }
     }
 }

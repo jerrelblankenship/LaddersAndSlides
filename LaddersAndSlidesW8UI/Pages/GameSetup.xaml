@@ -7,7 +7,31 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="75">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Button Name="_onePlayer" Margin="10" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Click="PlayerSelection_OnClick">
+            <Image Source="../../Assets/Players/Blue-Monster.png"></Image>
+        </Button>
+        
+        <Button Name="_twoPlayer" Margin="10" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Click="PlayerSelection_OnClick">
+            <Image Source="../../Assets/Players/Green-Monster.png"></Image>
+        </Button>
 
+        <Button Name="_threePlayer" Margin="10" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Click="PlayerSelection_OnClick">
+            <Image Source="../../Assets/Players/Orange-Monster.png"></Image>
+        </Button>
+
+        <Button Name="_fourPlayer" Margin="10" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Click="PlayerSelection_OnClick">
+            <Image Source="../../Assets/Players/Purple-Monster.png"></Image>
+        </Button>
     </Grid>
 </Page>
