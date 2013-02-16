@@ -39,11 +39,25 @@ namespace LaddersAndSlidesW8UI.Pages
         {
             var buttonName = ((Button) e.OriginalSource).Name;
             var numberOfPlayers = 1;
+            var playerList = new List<Player>();
 
             switch (buttonName)
             {
                 case "_twoPlayer":
-                    numberOfPlayers = 2;
+                    var player1 = new Player
+                        {
+                            Name = "Player 1",
+                            ImageUri = new Uri("ms-appx:///Assets/Players/Blue-Monster.png")
+                        };
+
+                    var player2 = new Player
+                    {
+                        Name = "Player 2",
+                        ImageUri = new Uri("ms-appx:///Assets/Players/Purple-Monster.png")
+                    };
+
+                    playerList.Add(player1);
+                    playerList.Add(player2);
                     break;
                 case "_threePlayer":
                     numberOfPlayers = 3;
@@ -53,7 +67,7 @@ namespace LaddersAndSlidesW8UI.Pages
                     break;
             }
 
-            Frame.Navigate(typeof (Game), numberOfPlayers);
+            Frame.Navigate(typeof (Game), playerList);
         }
     }
 }

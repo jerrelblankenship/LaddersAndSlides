@@ -10,43 +10,59 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace LaddersAndSlidesW8UI.Pages
 {
     /// <summary>
-    /// A basic page that provides characteristics common to most applications.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Game : LaddersAndSlidesW8UI.Common.LayoutAwarePage
+    public sealed partial class Game : Page
     {
+        private List<Player> Players; 
+
         public Game()
         {
             this.InitializeComponent();
+            Players = new List<Player>();
+            this.Loaded += Game_Loaded;
+        }
+
+        void Game_Loaded(object sender, RoutedEventArgs e)
+        {
+            var previousPlayerTokenCombinedHeight = 0.0;
+            foreach (var player in Players)
+            {
+                var image = new Image();
+                image.Width = 65;
+                image.Height = 65;
+                var bitmapImage = new BitmapImage();
+                bitmapImage.UriSource = player.ImageUri;
+                image.Source = bitmapImage;
+                Gutter.Children.Add(image);
+
+                previousPlayerTokenCombinedHeight += image.ActualHeight;
+                Canvas.SetTop(image, Gutter.ActualHeight - (previousPlayerTokenCombinedHeight  + 1));
+            }
+            
         }
 
         /// <summary>
-        /// Populates the page with content passed during navigation.  Any saved state is also
-        /// provided when recreating a page from a prior session.
+        /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
-        /// <param name="navigationParameter">The parameter value passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested.
-        /// </param>
-        /// <param name="pageState">A dictionary of state preserved by this page during an earlier
-        /// session.  This will be null the first time a page is visited.</param>
-        protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
+        /// <param name="e">Event data that describes how this page was reached.  The Parameter
+        /// property is typically used to configure the page.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Players = e.Parameter as List<Player>;
         }
 
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
-        protected override void SaveState(Dictionary<String, Object> pageState)
+        private void GameSpinner_OnTapped(object sender, TappedRoutedEventArgs e)
         {
+            throw new NotImplementedException();
         }
     }
 }
