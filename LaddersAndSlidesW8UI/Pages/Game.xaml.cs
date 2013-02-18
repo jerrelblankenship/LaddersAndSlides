@@ -1,53 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+﻿// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace LaddersAndSlidesW8UI.Pages
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using LadderAndSlides_Domain.Domain;
+    using Processing;
+    using Processing.Interfaces;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using Windows.UI.Xaml.Media.Imaging;
+    using Windows.UI.Xaml.Navigation;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class Game : Page
     {
-        private List<Player> Players; 
+        public List<Player> Players { get; set; }
+
+        private DispatcherTimer _timer;
+        public DispatcherTimer Timer
+        {
+            get { return _timer ?? (_timer = new DispatcherTimer {Interval = new TimeSpan(1000)}); }
+            set { _timer = value; }
+        }
+
+        private IPlayerProcessing _processingHelper;
+        public IPlayerProcessing ProcessingHelper
+        {
+            get { return _processingHelper ?? (_processingHelper = new PlayerProcessing()); }
+            set { _processingHelper = value; }
+        }
+
+        private IGameProcessing _gameProcessing;
+        public IGameProcessing GameProcessing
+        {
+            get { return _gameProcessing ?? (_gameProcessing = new GameProcessing()); }
+            set { _gameProcessing = value; }
+        }
 
         public Game()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Players = new List<Player>();
-            this.Loaded += Game_Loaded;
+            Timer.Tick += Timer_Tick;
+            
+            Loaded += GameLoaded;
         }
 
-        void Game_Loaded(object sender, RoutedEventArgs e)
+        void GameLoaded(object sender, RoutedEventArgs e)
         {
             var previousPlayerTokenCombinedHeight = 0.0;
-            foreach (var player in Players)
+            
+            foreach (var image in Players.Select(player => ProcessingHelper.CreatePlayerToken(player)))
             {
-                var image = new Image();
-                image.Width = 65;
-                image.Height = 65;
-                var bitmapImage = new BitmapImage();
-                bitmapImage.UriSource = player.ImageUri;
-                image.Source = bitmapImage;
-                Gutter.Children.Add(image);
+                _gutter.Children.Add(image);
 
                 previousPlayerTokenCombinedHeight += image.ActualHeight;
-                Canvas.SetTop(image, Gutter.ActualHeight - (previousPlayerTokenCombinedHeight  + 1));
+                Canvas.SetTop(image, _gutter.ActualHeight - (previousPlayerTokenCombinedHeight  + 1));
             }
-            
+
+            GameProcessing.CalculateTileHeightWidth(_gameBoard);
+            GameProcessing.RenderSpinner(_gameSpinner, _arrow);
+        }
+
+        void Timer_Tick(object sender, object e)
+        {
+            switch (GameProcessing.CurrentState)
+            {
+                case GameStateEngine.ArrowEvent:
+                    GameProcessing.SpinArrow(_arrow);
+                break;
+            }
         }
 
         /// <summary>
@@ -62,7 +89,12 @@ namespace LaddersAndSlidesW8UI.Pages
 
         private void GameSpinner_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (GameProcessing.CurrentState != GameStateEngine.ArrowEvent)
+            {
+                GameProcessing.CurrentState = GameStateEngine.ArrowEvent;
+                GameProcessing.CalculateArrowSpin();
+                Timer.Start();
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LaddersAndSlidesW8UI.Pages
+namespace LadderAndSlides_Domain.Domain
 {
     public class Player
     {

@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace LaddersAndSlidesW8UI.Pages
 {
+    using LadderAndSlides_Domain.Domain;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -38,7 +40,7 @@ namespace LaddersAndSlidesW8UI.Pages
         private void PlayerSelection_OnClick(object sender, RoutedEventArgs e)
         {
             var buttonName = ((Button) e.OriginalSource).Name;
-            var numberOfPlayers = 1;
+            //var numberOfPlayers = 1;
             var playerList = new List<Player>();
 
             switch (buttonName)
@@ -59,12 +61,12 @@ namespace LaddersAndSlidesW8UI.Pages
                     playerList.Add(player1);
                     playerList.Add(player2);
                     break;
-                case "_threePlayer":
-                    numberOfPlayers = 3;
-                    break;
-                case "_fourPlayer":
-                    numberOfPlayers = 4;
-                    break;
+                //case "_threePlayer":
+                //    numberOfPlayers = 3;
+                //    break;
+                //case "_fourPlayer":
+                //    numberOfPlayers = 4;
+                //    break;
             }
 
             Frame.Navigate(typeof (Game), playerList);
