@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace LaddersAndSlidesW8UI.Pages
 {
-    using LadderAndSlides_Domain.Domain;
+    using LaddersAndSlides_GameEngine.Domain;
 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

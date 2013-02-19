@@ -5,13 +5,12 @@ namespace LaddersAndSlidesW8UI.Pages
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using LadderAndSlides_Domain.Domain;
+    using LaddersAndSlides_GameEngine.Domain;
+    using LaddersAndSlides_GameEngine.Engine;
     using Processing;
-    using Processing.Interfaces;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Input;
-    using Windows.UI.Xaml.Media.Imaging;
     using Windows.UI.Xaml.Navigation;
 
     /// <summary>
@@ -21,6 +20,13 @@ namespace LaddersAndSlidesW8UI.Pages
     {
         public List<Player> Players { get; set; }
 
+        private GameEngine _gameEngine;
+        public GameEngine GameEngine
+        {
+            get { return _gameEngine ?? (_gameEngine = new GameEngine();)}
+            set { _gameEngine = value; }
+        }
+
         private DispatcherTimer _timer;
         public DispatcherTimer Timer
         {
@@ -28,25 +34,11 @@ namespace LaddersAndSlidesW8UI.Pages
             set { _timer = value; }
         }
 
-        private IPlayerProcessing _processingHelper;
-        public IPlayerProcessing ProcessingHelper
-        {
-            get { return _processingHelper ?? (_processingHelper = new PlayerProcessing()); }
-            set { _processingHelper = value; }
-        }
-
-        private IGameProcessing _gameProcessing;
-        public IGameProcessing GameProcessing
-        {
-            get { return _gameProcessing ?? (_gameProcessing = new GameProcessing()); }
-            set { _gameProcessing = value; }
-        }
-
         public Game()
         {
             InitializeComponent();
             Players = new List<Player>();
-            Timer.Tick += Timer_Tick;
+            Timer.Tick += TimerTick;
             
             Loaded += GameLoaded;
         }
@@ -55,7 +47,7 @@ namespace LaddersAndSlidesW8UI.Pages
         {
             var previousPlayerTokenCombinedHeight = 0.0;
             
-            foreach (var image in Players.Select(player => ProcessingHelper.CreatePlayerToken(player)))
+            foreach (var image in Players.Select(player => GameEngine.CreatePlayerToken(player)))
             {
                 _gutter.Children.Add(image);
 
@@ -63,18 +55,24 @@ namespace LaddersAndSlidesW8UI.Pages
                 Canvas.SetTop(image, _gutter.ActualHeight - (previousPlayerTokenCombinedHeight  + 1));
             }
 
-            GameProcessing.CalculateTileHeightWidth(_gameBoard);
-            GameProcessing.RenderSpinner(_gameSpinner, _arrow);
+            GameEngine.CalculateTileHeightWidth(_gameBoard);
+            RenderSpinner(_gameSpinner, _arrow);
         }
 
-        void Timer_Tick(object sender, object e)
+        void TimerTick(object sender, object e)
         {
-            switch (GameProcessing.CurrentState)
+            switch (GameEngine.CurrentState)
             {
                 case GameStateEngine.ArrowEvent:
-                    GameProcessing.SpinArrow(_arrow);
+                    GameEngine.ProcessArrowEvent(_arrow);
                 break;
             }
+        }
+
+        public void RenderSpinner(Canvas gameSpinner, Image arrow)
+        {
+            Canvas.SetTop(arrow, (gameSpinner.ActualHeight / 2) - (arrow.ActualHeight / 2) + (arrow.ActualHeight * .07));
+            Canvas.SetLeft(arrow, ((gameSpinner.ActualWidth / 2) - (arrow.ActualWidth / 2)) + (arrow.ActualHeight * .015));
         }
 
         /// <summary>
@@ -89,10 +87,10 @@ namespace LaddersAndSlidesW8UI.Pages
 
         private void GameSpinner_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            if (GameProcessing.CurrentState != GameStateEngine.ArrowEvent)
+            if (GameEngine.CurrentState != GameStateEngine.ArrowEvent)
             {
-                GameProcessing.CurrentState = GameStateEngine.ArrowEvent;
-                GameProcessing.CalculateArrowSpin();
+                GameEngine.CurrentState = GameStateEngine.ArrowEvent;
+                GameEngine.CalculateArrowSpin();
                 Timer.Start();
             }
         }
