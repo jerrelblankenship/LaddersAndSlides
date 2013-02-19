@@ -1,6 +1,4 @@
-﻿// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace LaddersAndSlidesW8UI.Pages
+﻿namespace LaddersAndSlidesW8UI.Pages
 {
     using System;
     using System.Collections.Generic;
@@ -18,12 +16,10 @@ namespace LaddersAndSlidesW8UI.Pages
     /// </summary>
     public sealed partial class Game : Page
     {
-        public List<Player> Players { get; set; }
-
         private GameEngine _gameEngine;
         public GameEngine GameEngine
         {
-            get { return _gameEngine ?? (_gameEngine = new GameEngine();)}
+            get { return _gameEngine ?? (_gameEngine = new GameEngine()); }
             set { _gameEngine = value; }
         }
 
@@ -37,9 +33,8 @@ namespace LaddersAndSlidesW8UI.Pages
         public Game()
         {
             InitializeComponent();
-            Players = new List<Player>();
-            Timer.Tick += TimerTick;
             
+            Timer.Tick += TimerTick;
             Loaded += GameLoaded;
         }
 
@@ -47,7 +42,7 @@ namespace LaddersAndSlidesW8UI.Pages
         {
             var previousPlayerTokenCombinedHeight = 0.0;
             
-            foreach (var image in Players.Select(player => GameEngine.CreatePlayerToken(player)))
+            foreach (var image in GameEngine.Players.Select(player => GameEngine.CreatePlayerToken(player)))
             {
                 _gutter.Children.Add(image);
 
@@ -55,6 +50,7 @@ namespace LaddersAndSlidesW8UI.Pages
                 Canvas.SetTop(image, _gutter.ActualHeight - (previousPlayerTokenCombinedHeight  + 1));
             }
 
+            GameEngine.GetNextPlayer();
             GameEngine.CalculateTileHeightWidth(_gameBoard);
             RenderSpinner(_gameSpinner, _arrow);
         }
@@ -65,7 +61,21 @@ namespace LaddersAndSlidesW8UI.Pages
             {
                 case GameStateEngine.ArrowEvent:
                     GameEngine.ProcessArrowEvent(_arrow);
-                break;
+                    break;
+                case GameStateEngine.ArrowDelayedEvent:
+                    GameEngine.ProcessArrowDelayEvent();
+                    break;
+                case GameStateEngine.PlayerEvent:
+
+                    var pToken = (Image) _gutter.Children.FirstOrDefault(x => ((Image) x).Name == GameEngine.CurrentPlayer.Name) ??
+                                 (Image)_gameBoard.Children.FirstOrDefault(x => ((Image)x).Name == GameEngine.CurrentPlayer.Name);
+                    GameEngine.ProcessPlayerEvent(pToken, _gutter, _gameBoard);
+                    break;
+                case GameStateEngine.GetNextPlayer:
+                    GameEngine.GetNextPlayer();
+                    break;
+                case GameStateEngine.TurnComplete:
+                    break;
             }
         }
 
@@ -82,7 +92,7 @@ namespace LaddersAndSlidesW8UI.Pages
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Players = e.Parameter as List<Player>;
+            GameEngine.Players = e.Parameter as List<Player>;
         }
 
         private void GameSpinner_OnTapped(object sender, TappedRoutedEventArgs e)

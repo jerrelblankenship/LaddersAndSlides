@@ -4,6 +4,10 @@
     {
         InitialGameState,
         ArrowEvent,
-        ArrowDelayedEvent
+        ArrowDelayedEvent,
+        PlayerEvent,
+        TurnComplete,
+        PlayerTransportEvent,
+        GetNextPlayer
     }
 }

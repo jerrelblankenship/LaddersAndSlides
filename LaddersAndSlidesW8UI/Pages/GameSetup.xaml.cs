@@ -49,13 +49,15 @@ namespace LaddersAndSlidesW8UI.Pages
                     var player1 = new Player
                         {
                             Name = "Player 1",
-                            ImageUri = new Uri("ms-appx:///Assets/Players/Blue-Monster.png")
+                            ImageUri = new Uri("ms-appx:///Assets/Players/Blue-Monster.png"),
+                            TurnOrder = 1
                         };
 
                     var player2 = new Player
                     {
                         Name = "Player 2",
-                        ImageUri = new Uri("ms-appx:///Assets/Players/Purple-Monster.png")
+                        ImageUri = new Uri("ms-appx:///Assets/Players/Purple-Monster.png"),
+                        TurnOrder = 2
                     };
 
                     playerList.Add(player1);
