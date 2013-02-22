@@ -57,26 +57,42 @@
 
         void TimerTick(object sender, object e)
         {
+            var pToken = GetCurrentPlayerToken();
+
             switch (GameEngine.CurrentState)
             {
                 case GameStateEngine.ArrowEvent:
                     GameEngine.ProcessArrowEvent(_arrow);
                     break;
+
                 case GameStateEngine.ArrowDelayedEvent:
                     GameEngine.ProcessArrowDelayEvent();
                     break;
-                case GameStateEngine.PlayerEvent:
 
-                    var pToken = (Image) _gutter.Children.FirstOrDefault(x => ((Image) x).Name == GameEngine.CurrentPlayer.Name) ??
-                                 (Image)_gameBoard.Children.FirstOrDefault(x => ((Image)x).Name == GameEngine.CurrentPlayer.Name);
+                case GameStateEngine.PlayerEvent:
                     GameEngine.ProcessPlayerEvent(pToken, _gutter, _gameBoard);
                     break;
+
                 case GameStateEngine.GetNextPlayer:
                     GameEngine.GetNextPlayer();
+                    break;
+
+                case GameStateEngine.PlayerSpecialMoveTransportCalculateEvent:
+                    GameEngine.CalculateSpecialMove(pToken, _gameBoard);
+                    break;
+
+                case GameStateEngine.PlayerSpecialMoveTransportMoveEvent:
+                    GameEngine.MakeSpecialMove(pToken, _gameBoard);
                     break;
                 case GameStateEngine.TurnComplete:
                     break;
             }
+        }
+
+        internal Image GetCurrentPlayerToken()
+        {
+            return (Image) _gutter.Children.FirstOrDefault(x => ((Image) x).Name == GameEngine.CurrentPlayer.Name) ??
+                   (Image)_gameBoard.Children.FirstOrDefault(x => ((Image)x).Name == GameEngine.CurrentPlayer.Name);
         }
 
         public void RenderSpinner(Canvas gameSpinner, Image arrow)

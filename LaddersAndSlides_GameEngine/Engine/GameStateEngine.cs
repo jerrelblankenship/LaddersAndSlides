@@ -7,7 +7,8 @@
         ArrowDelayedEvent,
         PlayerEvent,
         TurnComplete,
-        PlayerTransportEvent,
-        GetNextPlayer
+        PlayerSpecialMoveTransportCalculateEvent,
+        GetNextPlayer,
+        PlayerSpecialMoveTransportMoveEvent
     }
 }

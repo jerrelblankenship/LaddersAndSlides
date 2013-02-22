@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\GameEngine_GetNextPlayerTests.cs" />
+    <Compile Include="Engine\GameEngine_IsSpecialMoveTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

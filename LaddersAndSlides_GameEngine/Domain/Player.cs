@@ -12,6 +12,8 @@
         public bool TurnInProcess { get; set; }
         public bool CurrentlyOnAlternateRow { get; set; }
 
+        public int SpecialMoveTransportDestination { get; set; }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;

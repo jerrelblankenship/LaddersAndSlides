@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Engine\GameEngine.cs" />
+    <Compile Include="Engine\GameMoveSpecial.cs" />
     <Compile Include="Engine\GameStateEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

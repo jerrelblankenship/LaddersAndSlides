@@ -16,6 +16,7 @@
         public double TileHeight { get; set; }
         public double TileWidth { get; set; }
         public GameStateEngine CurrentState { get; set; }
+        public GameMoveSpecial CurrentSpecialMove { get; set; }
 
         protected Random RandomNumberGenerator { get; set; }
         protected double ArrowSpinDuration { get; set; }
@@ -149,14 +150,7 @@
                     {
                         Canvas.SetTop(currentPlayerToken, currentPositionTop);
 
-                        if (CurrentPlayer.CurrentlyOnAlternateRow)
-                        {
-                            Canvas.SetLeft(currentPlayerToken, currentPositionLeft - TileWidth);
-                        }
-                        else
-                        {
-                            Canvas.SetLeft(currentPlayerToken, currentPositionLeft + TileWidth);
-                        }
+                        MovePlayerToken(currentPlayerToken, currentPositionLeft);
                     }
 
                     CurrentPlayer.CurrentTileNumber++;
@@ -168,14 +162,121 @@
                     CurrentState = GameStateEngine.GetNextPlayer;
                     CurrentPlayer.TurnInProcess = false;
 
-                    //var specialMove = IsSpecialMove(PlayerTile);
-                    //if (specialMove)
-                    //{
-                    //    //HeadsUpDisplay.Text = "The player landed ended on a ladder.";
-                    //    CurrentState = GameStateEngine.PlayerTransportEvent;
-                    //}
+                    var specialMove = IsSpecialMove(CurrentPlayer.CurrentTileNumber);
+                    if (specialMove)
+                    {
+                        CurrentState = GameStateEngine.PlayerSpecialMoveTransportCalculateEvent;
+                    }
                 }
             }
         }
+
+        public void CalculateSpecialMove(Image currentPlayerToken, Canvas gameBoard)
+        {
+            var transportStartY = Canvas.GetTop(currentPlayerToken);
+            var transportStartX = Canvas.GetLeft(currentPlayerToken);
+            var transportDestinationX = transportStartX;
+            var transportDestinationY = transportStartY;
+
+            var numberOfMoves =  CurrentPlayer.SpecialMoveTransportDestination - CurrentPlayer.CurrentTileNumber;
+            var currentLocation = CurrentPlayer.CurrentTileNumber;
+            var tempAlternateRow = CurrentPlayer.CurrentlyOnAlternateRow;
+
+            for (var i = 1; i <= numberOfMoves; i++)
+            {
+                if (currentLocation % 10 == 0)
+                {
+                    transportDestinationY = transportDestinationY - TileHeight;
+
+                    var alternateNumber = currentLocation / 10;
+
+                    tempAlternateRow = alternateNumber % 2 != 0;
+                }
+                else
+                {
+                    if (tempAlternateRow)
+                    {
+                        transportDestinationX = transportDestinationX - TileWidth;
+                    }
+                    else
+                    {
+                        transportDestinationX = transportDestinationX + TileWidth;
+                    }
+                }
+
+                currentLocation++;
+            }
+
+            CurrentSpecialMove = new GameMoveSpecial
+                {
+                    TransportStartX = transportStartX,
+                    TransportStartY = transportStartY,
+                    TransportDestinationX = transportDestinationX,
+                    TransportDestinationY = transportDestinationY,
+                    TransportTime = 0
+                };
+
+            CurrentState = GameStateEngine.PlayerSpecialMoveTransportMoveEvent;
+        }
+
+        public void MakeSpecialMove(Image currentPlayerToken, Canvas gameBoard)
+        {
+            var xCurrent = CurrentSpecialMove.TransportStartX + (CurrentSpecialMove.TransportDestinationX - CurrentSpecialMove.TransportStartX) * CurrentSpecialMove.TransportTime;
+            var yCurrent = CurrentSpecialMove.TransportStartY + (CurrentSpecialMove.TransportDestinationY - CurrentSpecialMove.TransportStartY) * CurrentSpecialMove.TransportTime;
+
+            Canvas.SetTop(currentPlayerToken, yCurrent);
+            Canvas.SetLeft(currentPlayerToken, xCurrent);
+            CurrentSpecialMove.TransportTime += 0.05;
+
+            if (CurrentSpecialMove.TransportTime >= 1)
+            {
+                var alternateNumber = CurrentPlayer.SpecialMoveTransportDestination / 10;
+
+                CurrentPlayer.CurrentlyOnAlternateRow = alternateNumber % 2 != 0;
+                CurrentPlayer.CurrentTileNumber = CurrentPlayer.SpecialMoveTransportDestination;
+
+                CurrentState = GameStateEngine.GetNextPlayer;
+                CurrentPlayer.TurnInProcess = false;
+            }
+        }
+
+        internal bool IsSpecialMove(int playerTile)
+        {
+            var ladderMoves = new Dictionary<int, int>
+                {
+                    {1, 38},
+                    {4, 14},
+                    {9, 31},
+                    {21, 42},
+                    {28, 84},
+                    {36, 44},
+                    {51, 67},
+                    {71, 91},
+                    {80, 100}
+                };
+
+            var result = ladderMoves.FirstOrDefault(x => x.Key == playerTile);
+
+            if (result.Key != 0)
+            {
+                CurrentPlayer.SpecialMoveTransportDestination = result.Value;
+            }
+
+            return result.Key != 0;
+        }
+
+        internal void MovePlayerToken(Image currentPlayerToken, double currentPositionLeft)
+        {
+            if (CurrentPlayer.CurrentlyOnAlternateRow)
+            {
+                Canvas.SetLeft(currentPlayerToken, currentPositionLeft - TileWidth);
+            }
+            else
+            {
+                Canvas.SetLeft(currentPlayerToken, currentPositionLeft + TileWidth);
+            }
+        }
+
+        
     }
 }
