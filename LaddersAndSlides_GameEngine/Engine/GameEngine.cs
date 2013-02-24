@@ -11,6 +11,7 @@
 
     public class GameEngine
     {
+        private readonly IArrowLogic _arrowLogic;
         public List<Player> Players { get; set; }
         public Player CurrentPlayer { get; set; }
         public double TileHeight { get; set; }
@@ -43,8 +44,10 @@
 
         public void ProcessArrowEvent(Image arrow)
         {
+            //ArrowSpinDuration = _arrowLogic.CalculateArrowSpin();
+
             arrow.Projection = new PlaneProjection { CenterOfRotationY = 0.415, CenterOfRotationX = 0.5, RotationZ = ArrowSpinDuration };
-            ArrowSpinDuration *= .99;
+            ArrowSpinDuration *= .98;
 
             if (RandomNumberGenerator.NextDouble() < .05 && ArrowSpinDuration < 360)
             {
@@ -60,8 +63,8 @@
 
             var image = new Image
             {
-                Width = 65,
-                Height = 65,
+                Width = 45,
+                Height = 45,
                 Name = player.Name,
                 Source = bitmapImage
             };
@@ -71,6 +74,7 @@
 
         public int CalculateNumberOfPlayerMoves(double arrowSpinAngle)
         {
+            //return 16;
             if ((arrowSpinAngle >= 0 && arrowSpinAngle <= 40) ||
                 (arrowSpinAngle > 320 && arrowSpinAngle <= 360))
                 return 4;
@@ -92,7 +96,7 @@
 
         public void CalculateTileHeightWidth(Canvas gameBoard)
         {
-            TileHeight = gameBoard.ActualHeight / 10;
+            TileHeight = gameBoard.ActualHeight / 10 + 2;
             TileWidth = gameBoard.ActualWidth / 10;
         }
 
@@ -100,12 +104,12 @@
         {
             //generate new random number used for calculation
             RandomNumberGenerator = new Random();
-            ArrowSpinDuration = RandomNumberGenerator.Next(2500) + RandomNumberGenerator.Next(500, 1500);
+            ArrowSpinDuration = RandomNumberGenerator.Next(2500) + RandomNumberGenerator.Next(200, 800);
         }
 
         public void ProcessArrowDelayEvent()
         {
-            if (DateTime.Now.Subtract(WaitStart).Seconds > .5) // Wait a half second before starting the movement of the player token.
+            if (DateTime.Now.Subtract(WaitStart).Seconds > .45) // Wait a half second before starting the movement of the player token.
             {
                 CurrentState = GameStateEngine.PlayerEvent;
             }
@@ -113,7 +117,7 @@
 
         public void ProcessPlayerEvent(Image currentPlayerToken, Canvas gutter, Canvas gameBoard)
         {
-            if (DateTime.Now.Subtract(WaitStart).Seconds > .25)
+            if (DateTime.Now.Subtract(WaitStart).Seconds > .10)
             {
                 WaitStart = DateTime.Now;
 
@@ -177,34 +181,68 @@
             var transportStartX = Canvas.GetLeft(currentPlayerToken);
             var transportDestinationX = transportStartX;
             var transportDestinationY = transportStartY;
+            
+            var isLadderMove = CurrentPlayer.SpecialMoveTransportDestination > CurrentPlayer.CurrentTileNumber;
 
-            var numberOfMoves =  CurrentPlayer.SpecialMoveTransportDestination - CurrentPlayer.CurrentTileNumber;
-            var currentLocation = CurrentPlayer.CurrentTileNumber;
-            var tempAlternateRow = CurrentPlayer.CurrentlyOnAlternateRow;
-
-            for (var i = 1; i <= numberOfMoves; i++)
+            if (isLadderMove)
             {
-                if (currentLocation % 10 == 0)
-                {
-                    transportDestinationY = transportDestinationY - TileHeight;
+                var currentLocation = CurrentPlayer.CurrentTileNumber;
+                var tempAlternateRow = CurrentPlayer.CurrentlyOnAlternateRow;
+                var numberOfMoves = CurrentPlayer.SpecialMoveTransportDestination - CurrentPlayer.CurrentTileNumber;
 
-                    var alternateNumber = currentLocation / 10;
-
-                    tempAlternateRow = alternateNumber % 2 != 0;
-                }
-                else
+                for (var i = 1; i <= numberOfMoves; i++)
                 {
-                    if (tempAlternateRow)
+                    if (currentLocation%10 == 0)
                     {
-                        transportDestinationX = transportDestinationX - TileWidth;
+                        transportDestinationY = transportDestinationY - TileHeight;
+
+                        var alternateNumber = currentLocation/10;
+
+                        tempAlternateRow = alternateNumber%2 != 0;
                     }
                     else
                     {
-                        transportDestinationX = transportDestinationX + TileWidth;
+                        if (tempAlternateRow)
+                        {
+                            transportDestinationX = transportDestinationX - TileWidth;
+                        }
+                        else
+                        {
+                            transportDestinationX = transportDestinationX + TileWidth;
+                        }
+                    }
+
+                    currentLocation++;
+                }
+            }
+            else
+            {
+                transportDestinationX = TileWidth / 2;
+                transportDestinationY = TileHeight * 9;
+                var tempAlternateRow = false;
+
+                for (var i = 1; i < CurrentPlayer.SpecialMoveTransportDestination; i++)
+                {
+                    if (i % 10 == 0)
+                    {
+                        transportDestinationY = transportDestinationY - TileHeight;
+
+                        var alternateNumber = i / 10;
+
+                        tempAlternateRow = alternateNumber % 2 != 0;
+                    }
+                    else
+                    {
+                        if (tempAlternateRow)
+                        {
+                            transportDestinationX = transportDestinationX - TileWidth;
+                        }
+                        else
+                        {
+                            transportDestinationX = transportDestinationX + TileWidth;
+                        }
                     }
                 }
-
-                currentLocation++;
             }
 
             CurrentSpecialMove = new GameMoveSpecial
@@ -212,7 +250,7 @@
                     TransportStartX = transportStartX,
                     TransportStartY = transportStartY,
                     TransportDestinationX = transportDestinationX,
-                    TransportDestinationY = transportDestinationY,
+                    TransportDestinationY = transportDestinationY + 4,
                     TransportTime = 0
                 };
 
@@ -242,20 +280,28 @@
 
         internal bool IsSpecialMove(int playerTile)
         {
-            var ladderMoves = new Dictionary<int, int>
+            var specialMoves = new Dictionary<int, int>
                 {
                     {1, 38},
                     {4, 14},
                     {9, 31},
                     {21, 42},
                     {28, 84},
-                    {36, 44},
                     {51, 67},
                     {71, 91},
-                    {80, 100}
+                    {80, 100},
+                    {16,2},
+                    {47,26},
+                    {49,11},
+                    {56,53},
+                    {64,60},
+                    {87,24},
+                    {93,73},
+                    {95,75},
+                    {98,78}
                 };
 
-            var result = ladderMoves.FirstOrDefault(x => x.Key == playerTile);
+            var result = specialMoves.FirstOrDefault(x => x.Key == playerTile);
 
             if (result.Key != 0)
             {

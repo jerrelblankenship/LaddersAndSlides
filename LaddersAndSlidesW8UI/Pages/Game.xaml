@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Name="_clGame" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Name="_clGame" Background="Tan">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -29,14 +29,14 @@
         </Canvas>
 
         <Canvas Grid.Column="1" Grid.Row="1" Name="_gutter">
-            <!--<Image Name="Player1" Source="../../Assets/Players/Blue-Monster.png" Width="65" Height="65"/>
-            <Image Name="Player2" Source="../../Assets/Players/Orange-Monster.png" Width="65" Height="65"/>
+            <!--<Image Name="Player1" Source="../../Assets/Players/Blue-Monster.png" Width="55" Height="55"/>-->
+            <!--<Image Name="Player2" Source="../../Assets/Players/Orange-Monster.png" Width="65" Height="65"/>-->
             <Image Name="Player3" Source="../../Assets/Players/Green-Monster.png" Width="65" Height="65"/>
-            <Image Name="Player4" Source="../../Assets/Players/Purple-Monster.png" Width="65" Height="65"/>-->
+            <!--<Image Name="Player4" Source="../../Assets/Players/Purple-Monster.png" Width="65" Height="65"/>-->
         </Canvas>
         <Canvas Grid.Column="2" Grid.RowSpan="2" Name="_gameBoard" Margin="20">
             <Canvas.Background>
-                <ImageBrush ImageSource="../../Assets/GameArtifacts/chutesAndLadders2.png"/>
+                <ImageBrush ImageSource="../../Assets/GameArtifacts/chutesAndLadders3.png"/>
             </Canvas.Background>
         </Canvas>
 
