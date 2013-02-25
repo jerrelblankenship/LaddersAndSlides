@@ -1413,8 +1413,17 @@
     <Style x:Key="GameHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PageHeaderTextStyle}">
         <Setter Property="FontFamily" Value="Andy"/>
         <Setter Property="FontStyle" Value="Italic"/>
-        <Setter Property="FontSize" Value="72"/>
+        <Setter Property="FontSize" Value="64"/>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="Teal"></Setter>
+    </Style>
+
+    <Style x:Key="DynamicGameHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PageHeaderTextStyle}">
+        <Setter Property="FontFamily" Value="Andy"/>
+        <Setter Property="FontStyle" Value="Italic"/>
+        <Setter Property="FontSize" Value="56"/>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="SteelBlue"></Setter>
     </Style>
 
     <Style x:Key="PageSubheaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource SubheaderTextStyle}">

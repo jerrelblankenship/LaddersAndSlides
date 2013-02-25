@@ -18,8 +18,20 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBox Name="_headsUpDisplay" Grid.Column="0" Grid.Row="0" IsReadOnly="True" Text="Player Moves:" Height="30"></TextBox>
-
+        <Grid Name="_playerNotificationArea" Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" Style="{StaticResource GameHeaderTextStyle}">Current Player:</TextBlock>
+            <StackPanel Grid.Row="1">
+                <TextBlock Style="{StaticResource DynamicGameHeaderTextStyle}" Name="_playerNotificationDisplayText">Player 1</TextBlock>
+                <Image Name="_playerNotificationDisplayImage" Source="../../Assets/Players/Green-Monster.png" Width="45" Height="45"/>
+            </StackPanel>
+            
+        </Grid>
+        
         <Canvas Name="_gameSpinner" Grid.Column="0" Grid.Row="1" Tapped="GameSpinner_OnTapped" Margin="75,65,75,65" >
             <Canvas.Background>
                 <ImageBrush ImageSource="../../Assets/GameArtifacts/Spinner.png"></ImageBrush>
@@ -29,11 +41,8 @@
         </Canvas>
 
         <Canvas Grid.Column="1" Grid.Row="1" Name="_gutter">
-            <!--<Image Name="Player1" Source="../../Assets/Players/Blue-Monster.png" Width="55" Height="55"/>-->
-            <!--<Image Name="Player2" Source="../../Assets/Players/Orange-Monster.png" Width="65" Height="65"/>-->
-            <Image Name="Player3" Source="../../Assets/Players/Green-Monster.png" Width="65" Height="65"/>
-            <!--<Image Name="Player4" Source="../../Assets/Players/Purple-Monster.png" Width="65" Height="65"/>-->
         </Canvas>
+        
         <Canvas Grid.Column="2" Grid.RowSpan="2" Name="_gameBoard" Margin="20">
             <Canvas.Background>
                 <ImageBrush ImageSource="../../Assets/GameArtifacts/chutesAndLadders3.png"/>

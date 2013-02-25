@@ -9,6 +9,7 @@
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Input;
+    using Windows.UI.Xaml.Media.Imaging;
     using Windows.UI.Xaml.Navigation;
 
     /// <summary>
@@ -51,6 +52,8 @@
             }
 
             GameEngine.GetNextPlayer();
+            _playerNotificationDisplayText.Text = GameEngine.CurrentPlayer.Name;
+            _playerNotificationDisplayImage.Source = new BitmapImage { UriSource = GameEngine.CurrentPlayer.ImageUri };
             GameEngine.CalculateTileHeightWidth(_gameBoard);
             RenderSpinner(_gameSpinner, _arrow);
         }
@@ -75,6 +78,8 @@
 
                 case GameStateEngine.GetNextPlayer:
                     GameEngine.GetNextPlayer();
+                    _playerNotificationDisplayText.Text = GameEngine.CurrentPlayer.Name;
+                    _playerNotificationDisplayImage.Source = new BitmapImage { UriSource = GameEngine.CurrentPlayer.ImageUri };
                     break;
 
                 case GameStateEngine.PlayerSpecialMoveTransportCalculateEvent:
