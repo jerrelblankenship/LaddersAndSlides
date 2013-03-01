@@ -7,6 +7,8 @@
         public string Name { get; set; }
         public Uri ImageUri { get; set; }
         public int CurrentTileNumber { get; set; }
+        public int CurrentGridRow { get; set; }
+        public int CurrentGridColumn { get; set; }
         public int CurrentMovesRemaining { get; set; }
         public int TurnOrder { get; set; }
         public bool TurnInProcess { get; set; }

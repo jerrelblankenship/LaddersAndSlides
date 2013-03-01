@@ -82,9 +82,9 @@
                     _playerNotificationDisplayImage.Source = new BitmapImage { UriSource = GameEngine.CurrentPlayer.ImageUri };
                     break;
 
-                case GameStateEngine.PlayerSpecialMoveTransportCalculateEvent:
-                    GameEngine.CalculateSpecialMove(pToken, _gameBoard);
-                    break;
+                //case GameStateEngine.PlayerSpecialMoveTransportCalculateEvent:
+                //    GameEngine.CalculateSpecialMove(pToken, _gameBoard);
+                //    break;
 
                 case GameStateEngine.PlayerSpecialMoveTransportMoveEvent:
                     GameEngine.MakeSpecialMove(pToken, _gameBoard);
