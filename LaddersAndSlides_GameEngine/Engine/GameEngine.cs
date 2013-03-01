@@ -63,8 +63,8 @@
 
             var image = new Image
             {
-                Width = 45,
-                Height = 45,
+                Width = 55,
+                Height = 55,
                 Name = player.Name,
                 Source = bitmapImage
             };
@@ -74,7 +74,7 @@
 
         public int CalculateNumberOfPlayerMoves(double arrowSpinAngle)
         {
-            //return 16;
+            return 100;
             if ((arrowSpinAngle >= 0 && arrowSpinAngle <= 40) ||
                 (arrowSpinAngle > 320 && arrowSpinAngle <= 360))
                 return 4;
@@ -94,7 +94,7 @@
             return 5;
         }
 
-        public void CalculateTileHeightWidth(Canvas gameBoard)
+        public void CalculateTileHeightWidth(Grid gameBoard)
         {
             TileHeight = gameBoard.ActualHeight / 10 + 2;
             TileWidth = gameBoard.ActualWidth / 10;
@@ -115,9 +115,9 @@
             }
         }
 
-        public void ProcessPlayerEvent(Image currentPlayerToken, Canvas gutter, Canvas gameBoard)
+        public void ProcessPlayerEvent(Image currentPlayerToken, Canvas gutter, Grid gameBoard)
         {
-            if (DateTime.Now.Subtract(WaitStart).Seconds > .10)
+            if (DateTime.Now.Subtract(WaitStart).Milliseconds > 375)
             {
                 WaitStart = DateTime.Now;
 
@@ -131,30 +131,33 @@
                 {
                     gutter.Children.Remove(currentPlayerToken);
                     gameBoard.Children.Add(currentPlayerToken);
-                    Canvas.SetTop(currentPlayerToken, TileHeight * 9);
-                    Canvas.SetLeft(currentPlayerToken, TileWidth / 2);
+                    
+                    Grid.SetRow(currentPlayerToken, 9);
+                    Grid.SetColumn(currentPlayerToken, 0);
+                    
                     CurrentPlayer.CurrentMovesRemaining--;
                     CurrentPlayer.CurrentTileNumber = 1;
                 }
                 else
                 {
-                    var currentPositionTop = Canvas.GetTop(currentPlayerToken);
-                    var currentPositionLeft = Canvas.GetLeft(currentPlayerToken);
+                    var currentColumn = Grid.GetColumn(currentPlayerToken);
+                    var currentRow = Grid.GetRow(currentPlayerToken);
 
                     if (CurrentPlayer.CurrentTileNumber % 10 == 0)
                     {
-                        Canvas.SetTop(currentPlayerToken, currentPositionTop - TileHeight);
-
-                        var alternateNumber = CurrentPlayer.CurrentTileNumber / 10;
-
-                        CurrentPlayer.CurrentlyOnAlternateRow = alternateNumber % 2 != 0;
-
+                        Grid.SetRow(currentPlayerToken, currentRow - 1);
+                        CurrentPlayer.CurrentlyOnAlternateRow = currentRow % 2 != 0;
                     }
                     else
                     {
-                        Canvas.SetTop(currentPlayerToken, currentPositionTop);
-
-                        MovePlayerToken(currentPlayerToken, currentPositionLeft);
+                        if (CurrentPlayer.CurrentlyOnAlternateRow)
+                        {
+                            Grid.SetColumn(currentPlayerToken, currentColumn - 1);
+                        }
+                        else
+                        {
+                            Grid.SetColumn(currentPlayerToken, currentColumn + 1);
+                        }
                     }
 
                     CurrentPlayer.CurrentTileNumber++;
@@ -175,7 +178,7 @@
             }
         }
 
-        public void CalculateSpecialMove(Image currentPlayerToken, Canvas gameBoard)
+        public void CalculateSpecialMove(Image currentPlayerToken, Grid gameBoard)
         {
             var transportStartY = Canvas.GetTop(currentPlayerToken);
             var transportStartX = Canvas.GetLeft(currentPlayerToken);
@@ -257,7 +260,7 @@
             CurrentState = GameStateEngine.PlayerSpecialMoveTransportMoveEvent;
         }
 
-        public void MakeSpecialMove(Image currentPlayerToken, Canvas gameBoard)
+        public void MakeSpecialMove(Image currentPlayerToken, Grid gameBoard)
         {
             var xCurrent = CurrentSpecialMove.TransportStartX + (CurrentSpecialMove.TransportDestinationX - CurrentSpecialMove.TransportStartX) * CurrentSpecialMove.TransportTime;
             var yCurrent = CurrentSpecialMove.TransportStartY + (CurrentSpecialMove.TransportDestinationY - CurrentSpecialMove.TransportStartY) * CurrentSpecialMove.TransportTime;
@@ -308,7 +311,8 @@
                 CurrentPlayer.SpecialMoveTransportDestination = result.Value;
             }
 
-            return result.Key != 0;
+            return false;
+            //return result.Key != 0;
         }
 
         internal void MovePlayerToken(Image currentPlayerToken, double currentPositionLeft)
