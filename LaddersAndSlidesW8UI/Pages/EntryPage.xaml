@@ -13,13 +13,15 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
-        <Canvas Grid.Row="0" Grid.RowSpan="2" Name="MainScreen" Margin="20">
+        <Canvas Grid.Row="0" Grid.RowSpan="2" Name="MainScreen">
             <Canvas.Background>
-                <ImageBrush ImageSource="../../Assets/GameArtifacts/MainScreen.png"></ImageBrush>
+                <ImageBrush ImageSource="../../Assets/SplashScreen.png"></ImageBrush>
             </Canvas.Background>
         </Canvas>
         
-        <Button Grid.Row="1" Name="PlayGame" Margin="60,75,60,39" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontFamily="Andy" FontSize="72" FontStyle="Italic" FontWeight="Bold" Background="Transparent" Foreground="#FFFF4D00" Width="400" Height="99" BorderBrush="{x:Null}" BorderThickness="0" IsDoubleTapEnabled="False" IsRightTapEnabled="False" Click="PlayGame_OnClick">Play Game!
+        <Button Grid.Row="1" Name="PlayGame" Margin="60,75,60,10" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                FontFamily="Andy" FontSize="96" FontStyle="Italic" FontWeight="Bold" Background="Transparent" 
+                Foreground="#FF6A197C" Width="800" Height="200" BorderBrush="{x:Null}" BorderThickness="0" IsDoubleTapEnabled="False" IsRightTapEnabled="False" Click="PlayGame_OnClick">Play Game!
         </Button>
     </Grid>
 </Page>

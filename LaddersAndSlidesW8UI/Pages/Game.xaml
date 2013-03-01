@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Name="_clGame" Background="Tan">
+    <Grid Name="_clGame" Background="#FFC5AF92">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -27,7 +27,7 @@
             <TextBlock Grid.Row="0" Style="{StaticResource GameHeaderTextStyle}">Current Player:</TextBlock>
             <StackPanel Grid.Row="1">
                 <TextBlock Style="{StaticResource DynamicGameHeaderTextStyle}" Name="_playerNotificationDisplayText">Player 1</TextBlock>
-                <Image Name="_playerNotificationDisplayImage" Source="../../Assets/Players/Green-Monster.png" Width="45" Height="45"/>
+                <Image Name="_playerNotificationDisplayImage" Source="../../Assets/Players/Green-Monster.png" Width="125" Height="125"/>
             </StackPanel>
             
         </Grid>
@@ -43,11 +43,40 @@
         <Canvas Grid.Column="1" Grid.Row="1" Name="_gutter">
         </Canvas>
         
-        <Canvas Grid.Column="2" Grid.RowSpan="2" Name="_gameBoard" Margin="20">
+        <!--<Canvas Grid.Column="2" Grid.RowSpan="2" Name="_gameBoard" Margin="20">
             <Canvas.Background>
                 <ImageBrush ImageSource="../../Assets/GameArtifacts/chutesAndLadders3.png"/>
             </Canvas.Background>
-        </Canvas>
-
+        </Canvas>-->
+        
+        <Grid Grid.Column="2" Grid.RowSpan="2" Name="_gameBoard" Margin="5">
+            <Grid.Background>
+                <ImageBrush ImageSource="../../Assets/GameArtifacts/chutesAndLadders3.png"></ImageBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.2*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                <ColumnDefinition Width="1.01*"></ColumnDefinition>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="1.1*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
     </Grid>
 </Page>
