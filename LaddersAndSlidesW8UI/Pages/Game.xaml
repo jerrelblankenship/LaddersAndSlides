@@ -6,6 +6,40 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+	<Page.Resources>
+		<Storyboard x:Name="_ladderMove1_38">
+			<DoubleAnimation Duration="0:0:1.5" To="173.814" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:1.5" To="-229.524" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="_ladderMove4_14">
+			<DoubleAnimation Duration="0:0:1.5" To="261" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:1.5" To="-86" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="_ladderMove9_31">
+			<DoubleAnimation Duration="0:0:1.5" To="72.222" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:1.5" To="-226.667" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="_ladderMove21_42">
+			<DoubleAnimation Duration="0:0:1.5" To="81.111" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:1.5" To="-155.556" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="_ladderMove28_84">
+			<DoubleAnimation Duration="0:0:1.5" To="-348.889" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:1.5" To="-447.778" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="_ladderMove51_67">
+			<DoubleAnimation Duration="0:0:1.5" To="-235.556" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:1.5" To="-84.444" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="_ladderMove71_91">
+			<DoubleAnimation Duration="0:0:0.7" To="-15.556" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:0.7" To="-150" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="_ladderMove80_100">
+			<DoubleAnimation Duration="0:0:0.6" To="27.778" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+			<DoubleAnimation Duration="0:0:0.6" To="-153.333" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="image" d:IsOptimized="True"/>
+		</Storyboard>
+	</Page.Resources>
 
     <Grid Name="_clGame" Background="#FFC5AF92">
         <Grid.RowDefinitions>
@@ -77,6 +111,11 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            
+            <Image Name="image" Grid.Column="0" Grid.Row="2" Source="../../Assets/Players/Orange-Monster.png" Width="55" Height="55" RenderTransformOrigin="0.5,0.5">
+            	<Image.RenderTransform>
+            		<CompositeTransform/>
+            	</Image.RenderTransform></Image>
         </Grid>
     </Grid>
 </Page>
