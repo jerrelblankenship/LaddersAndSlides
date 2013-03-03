@@ -125,5 +125,10 @@
                 Timer.Start();
             }
         }
+
+        private void _specialMove_OnCompleted(object sender, object e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
