@@ -71,7 +71,8 @@
                 Width = 55,
                 Height = 55,
                 Name = player.Name,
-                Source = bitmapImage
+                Source = bitmapImage,
+                RenderTransform = new CompositeTransform()
             };
 
             return image;
@@ -79,7 +80,7 @@
 
         public int CalculateNumberOfPlayerMoves(double arrowSpinAngle)
         {
-            //return 98;
+            return 1;
             if ((arrowSpinAngle >= 0 && arrowSpinAngle <= 40) ||
                 (arrowSpinAngle > 320 && arrowSpinAngle <= 360))
                 return 4;
