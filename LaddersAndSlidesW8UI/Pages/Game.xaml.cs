@@ -5,6 +5,7 @@ namespace LaddersAndSlidesW8UI.Pages
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using LaddersAndSlides_GameEngine.Domain;
     using LaddersAndSlides_GameEngine.Engine;
     using Processing;
@@ -89,21 +90,29 @@ namespace LaddersAndSlidesW8UI.Pages
                     break;
 
                 case GameStateEngine.PlayerSpecialMoveTransportMoveEvent:
-                    if (!AnimationInProgress)
+                    try
                     {
-                        SetSpecialMove();
-                        if (CurrentAnimation != null)
+                        if (!AnimationInProgress)
                         {
-                            AnimationInProgress = true;
-                            //CurrentAnimation.Begin();
-                            _ladderMove1_38.Begin();
-                        }
-                        else
-                        {
-                            GameEngine.CurrentState = GameStateEngine.GetNextPlayer;
-                            GameEngine.CurrentPlayer.TurnInProcess = false;
+                            SetSpecialMove();
+                            if (CurrentAnimation != null)
+                            {
+                                AnimationInProgress = true;
+                                CurrentAnimation.Begin();
+                                //_ladderMove1_38.Begin();
+                            }
+                            else
+                            {
+                                GameEngine.CurrentState = GameStateEngine.GetNextPlayer;
+                                GameEngine.CurrentPlayer.TurnInProcess = false;
+                            }
                         }
                     }
+                    catch (Exception exception)
+                    {
+                        
+                    }
+                    
                     break;
                 case GameStateEngine.TurnComplete:
                     break;

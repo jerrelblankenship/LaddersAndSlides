@@ -53,15 +53,15 @@ namespace LaddersAndSlidesW8UI.Pages
                             TurnOrder = 1
                         };
 
-                    var player2 = new Player
-                    {
-                        Name = "Player 2",
-                        ImageUri = new Uri("ms-appx:///Assets/Players/Purple-Monster.png"),
-                        TurnOrder = 2
-                    };
+                    //var player2 = new Player
+                    //{
+                    //    Name = "Player 2",
+                    //    ImageUri = new Uri("ms-appx:///Assets/Players/Purple-Monster.png"),
+                    //    TurnOrder = 2
+                    //};
 
                     playerList.Add(player1);
-                    playerList.Add(player2);
+                    //playerList.Add(player2);
                     break;
                 //case "_threePlayer":
                 //    numberOfPlayers = 3;
