@@ -6,9 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-	<Page.Resources>
-		
-	</Page.Resources>
 
     <Grid Name="_clGame" Background="#FFC5AF92">
         <Grid.RowDefinitions>
@@ -46,7 +43,7 @@
         <Canvas Grid.Column="1" Grid.Row="1" Name="_gutter">
         </Canvas>
         
-       <Grid Grid.Column="2" Grid.RowSpan="2" Name="_gameBoard" Margin="5">
+        <Grid Grid.Column="2" Grid.RowSpan="2" Name="_gameBoard" Margin="5">
            <Grid.Resources>
                 <Storyboard x:Name="_ladderMove1_38" Completed="_specialMove_OnCompleted">
                     <DoubleAnimation Duration="0:0:1.5" To="173.814" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" d:IsOptimized="True"/>
@@ -332,5 +329,9 @@
             		<CompositeTransform/>
             	</Image.RenderTransform></Image>-->
         </Grid>
+        
+        <Canvas Name="_winnerScreen" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="400,275,400,400" ScrollViewer.VerticalScrollBarVisibility="Disabled" Visibility="Collapsed">
+            <TextBlock Opacity="0.5" FontFamily="Global User Interface" FontSize="150" HorizontalAlignment="Center" VerticalAlignment="Center">You Win!!!!!</TextBlock>
+        </Canvas>
     </Grid>
 </Page>

@@ -7,8 +7,8 @@
         ArrowDelayedEvent,
         PlayerEvent,
         TurnComplete,
-        PlayerSpecialMoveTransportCalculateEvent,
         GetNextPlayer,
-        PlayerSpecialMoveTransportMoveEvent
+        PlayerSpecialMoveTransportMoveEvent,
+        WinnerDeclared
     }
 }

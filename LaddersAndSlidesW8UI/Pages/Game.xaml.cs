@@ -61,7 +61,6 @@ namespace LaddersAndSlidesW8UI.Pages
             GameEngine.GetNextPlayer();
             _playerNotificationDisplayText.Text = GameEngine.CurrentPlayer.Name;
             _playerNotificationDisplayImage.Source = new BitmapImage { UriSource = GameEngine.CurrentPlayer.ImageUri };
-            GameEngine.CalculateTileHeightWidth(_gameBoard);
             RenderSpinner(_gameSpinner, _arrow);
         }
 
@@ -99,7 +98,6 @@ namespace LaddersAndSlidesW8UI.Pages
                             {
                                 AnimationInProgress = true;
                                 CurrentAnimation.Begin();
-                                //_ladderMove1_38.Begin();
                             }
                             else
                             {
@@ -115,6 +113,8 @@ namespace LaddersAndSlidesW8UI.Pages
                     
                     break;
                 case GameStateEngine.TurnComplete:
+                    break;
+                case GameStateEngine.WinnerDeclared:
                     break;
             }
         }

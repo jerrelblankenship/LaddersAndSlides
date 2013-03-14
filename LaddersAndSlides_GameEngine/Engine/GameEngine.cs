@@ -14,8 +14,6 @@
         public List<Player> Players { get; set; }
         public List<SpecialMove> SpecialMoves { get; set; } 
         public Player CurrentPlayer { get; set; }
-        public double TileHeight { get; set; }
-        public double TileWidth { get; set; }
         public GameStateEngine CurrentState { get; set; }
         public SpecialMove CurrentSpecialMove { get; set; }
 
@@ -100,12 +98,6 @@
             return 5;
         }
 
-        public void CalculateTileHeightWidth(Grid gameBoard)
-        {
-            TileHeight = gameBoard.ActualHeight / 10 + 2;
-            TileWidth = gameBoard.ActualWidth / 10;
-        }
-
         public void CalculateArrowSpin()
         {
             //generate new random number used for calculation
@@ -151,27 +143,14 @@
                     var currentColumn = Grid.GetColumn(currentPlayerToken);
                     var currentRow = Grid.GetRow(currentPlayerToken);
 
-                    if (CurrentPlayer.CurrentTileNumber % 10 == 0)
+                    if (CurrentPlayer.CurrentTileNumber + CurrentPlayer.CurrentMovesRemaining > 100)
                     {
-                        Grid.SetRow(currentPlayerToken, currentRow - 1);
-                        CurrentPlayer.CurrentlyOnAlternateRow = currentRow % 2 != 0;
+                        CurrentPlayer.CurrentMovesRemaining = 0;
                     }
                     else
                     {
-                        if (CurrentPlayer.CurrentlyOnAlternateRow)
-                        {
-                            Grid.SetColumn(currentPlayerToken, currentColumn - 1);
-                        }
-                        else
-                        {
-                            Grid.SetColumn(currentPlayerToken, currentColumn + 1);
-                        }
+                        MakePlayerMove(currentPlayerToken, currentRow, currentColumn);
                     }
-
-                    CurrentPlayer.CurrentTileNumber++;
-                    CurrentPlayer.CurrentMovesRemaining--;
-                    CurrentPlayer.CurrentGridColumn = Grid.GetColumn(currentPlayerToken);
-                    CurrentPlayer.CurrentGridRow = Grid.GetRow(currentPlayerToken);
                 }
 
                 if (CurrentPlayer.CurrentMovesRemaining <= 0)
@@ -180,12 +159,42 @@
                     CurrentPlayer.TurnInProcess = false;
 
                     var specialMove = IsSpecialMove(CurrentPlayer.CurrentTileNumber);
+                    
                     if (specialMove)
                     {
                         CurrentState = GameStateEngine.PlayerSpecialMoveTransportMoveEvent;
                     }
+                    else if (CurrentPlayer.CurrentTileNumber == 100)
+                    {
+                        CurrentState = GameStateEngine.WinnerDeclared;
+                    }
                 }
             }
+        }
+
+        internal void MakePlayerMove(Image currentPlayerToken, int currentRow, int currentColumn)
+        {
+            if (CurrentPlayer.CurrentTileNumber%10 == 0)
+            {
+                Grid.SetRow(currentPlayerToken, currentRow - 1);
+                CurrentPlayer.CurrentlyOnAlternateRow = currentRow%2 != 0;
+            }
+            else
+            {
+                if (CurrentPlayer.CurrentlyOnAlternateRow)
+                {
+                    Grid.SetColumn(currentPlayerToken, currentColumn - 1);
+                }
+                else
+                {
+                    Grid.SetColumn(currentPlayerToken, currentColumn + 1);
+                }
+            }
+
+            CurrentPlayer.CurrentTileNumber++;
+            CurrentPlayer.CurrentMovesRemaining--;
+            CurrentPlayer.CurrentGridColumn = Grid.GetColumn(currentPlayerToken);
+            CurrentPlayer.CurrentGridRow = Grid.GetRow(currentPlayerToken);
         }
 
         public void MakeSpecialMove(Image currentPlayerToken, Grid gameBoard)
