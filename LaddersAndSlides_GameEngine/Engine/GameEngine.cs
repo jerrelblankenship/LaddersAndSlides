@@ -78,7 +78,7 @@
 
         public int CalculateNumberOfPlayerMoves(double arrowSpinAngle)
         {
-            //return 98;
+            return 87;
             if ((arrowSpinAngle >= 0 && arrowSpinAngle <= 40) ||
                 (arrowSpinAngle > 320 && arrowSpinAngle <= 360))
                 return 4;

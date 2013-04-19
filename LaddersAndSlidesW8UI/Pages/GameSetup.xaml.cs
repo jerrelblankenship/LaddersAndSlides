@@ -45,7 +45,7 @@ namespace LaddersAndSlidesW8UI.Pages
 
             switch (buttonName)
             {
-                case "_twoPlayer":
+                case "GreenMonster":
                     var player1 = new Player
                         {
                             Name = "Player 1",
@@ -63,10 +63,10 @@ namespace LaddersAndSlidesW8UI.Pages
                     playerList.Add(player1);
                     //playerList.Add(player2);
                     break;
-                //case "_threePlayer":
+                //case "OrangeMonster":
                 //    numberOfPlayers = 3;
                 //    break;
-                //case "_fourPlayer":
+                //case "PurpleMonster":
                 //    numberOfPlayers = 4;
                 //    break;
             }

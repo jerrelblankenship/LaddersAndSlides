@@ -11,27 +11,44 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <Button IsEnabled="False" Name="_onePlayer" Margin="10" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Click="PlayerSelection_OnClick">
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource GameHeaderTextStyle}">Select Player 1</TextBlock>
+   
+        <Button Name="BlueMonster" Margin="10" HorizontalAlignment="Center" 
+                Grid.Row="2" Grid.Column="0">
             <Image Source="../../Assets/Players/Blue-Monster.png"></Image>
         </Button>
         
-        <Button Name="_twoPlayer" Margin="10" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Click="PlayerSelection_OnClick">
+        <Button Name="GreenMonster" Margin="10" HorizontalAlignment="Center" 
+                Grid.Row="2" Grid.Column="1" Click="PlayerSelection_OnClick">
             <Image Source="../../Assets/Players/Green-Monster.png"></Image>
         </Button>
 
-        <Button IsEnabled="False" Name="_threePlayer" Margin="10" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Click="PlayerSelection_OnClick">
+        <Button Name="OrangeMonster" Margin="10" HorizontalAlignment="Center" 
+                Grid.Row="2" Grid.Column="2">
             <Image Source="../../Assets/Players/Orange-Monster.png"></Image>
         </Button>
 
-        <Button IsEnabled="False" Name="_fourPlayer" Margin="10" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Click="PlayerSelection_OnClick">
+        <Button Name="PurpleMonster" Margin="10" HorizontalAlignment="Center" 
+                Grid.Row="2" Grid.Column="3">
             <Image Source="../../Assets/Players/Purple-Monster.png"></Image>
+        </Button>
+        
+        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Name="GameStart" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                FontFamily="Andy" FontSize="72"  FontWeight="Bold" Background="Transparent" 
+                BorderBrush="{x:Null}" BorderThickness="0" 
+                IsDoubleTapEnabled="False" IsRightTapEnabled="False" >Start Game
         </Button>
     </Grid>
 </Page>
