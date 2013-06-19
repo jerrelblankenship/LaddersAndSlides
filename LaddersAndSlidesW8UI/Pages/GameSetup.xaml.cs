@@ -24,6 +24,7 @@ namespace LaddersAndSlidesW8UI.Pages
     public sealed partial class GameSetup : Page
     {
         public int NumberOfPlayers { get; set; }
+        public List<Player> PlayerList { get; set; } 
 
         public GameSetup()
         {
@@ -38,43 +39,67 @@ namespace LaddersAndSlidesW8UI.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             NumberOfPlayers = 0;
+            PlayerList = new List<Player>();
         }
 
         private void PlayerSelection_OnClick(object sender, RoutedEventArgs e)
         {
-            var buttonName = ((Button) e.OriginalSource).Name;
-            //var numberOfPlayers = 1;
-            var playerList = new List<Player>();
+            var button = ((Button) e.OriginalSource);
+            var buttonName = button.Name;
+            button.IsEnabled = false;
 
             switch (buttonName)
             {
                 case "GreenMonster":
-                    var player1 = new Player
+                    NumberOfPlayers++;
+                    var player_green = new Player
                         {
-                            Name = "Player 1",
+                            Name = string.Format("Player {0}", NumberOfPlayers),
                             ImageUri = new Uri("ms-appx:///Assets/Players/Green-Monster.png"),
-                            TurnOrder = 1
+                            TurnOrder = NumberOfPlayers
                         };
 
-                    //var player2 = new Player
-                    //{
-                    //    Name = "Player 2",
-                    //    ImageUri = new Uri("ms-appx:///Assets/Players/Purple-Monster.png"),
-                    //    TurnOrder = 2
-                    //};
-
-                    playerList.Add(player1);
-                    //playerList.Add(player2);
+                    PlayerList.Add(player_green);
                     break;
-                //case "OrangeMonster":
-                //    numberOfPlayers = 3;
-                //    break;
-                //case "PurpleMonster":
-                //    numberOfPlayers = 4;
-                //    break;
-            }
+                case "BlueMonster":
+                    NumberOfPlayers++;
+                    var player_blue = new Player
+                        {
+                            Name = string.Format("Player {0}", NumberOfPlayers),
+                            ImageUri = new Uri("ms-appx:///Assets/Players/Blue-Monster.png"),
+                            TurnOrder = NumberOfPlayers
+                        };
 
-            Frame.Navigate(typeof (Game), playerList);
+                    PlayerList.Add(player_blue);
+                    break;
+                case "OrangeMonster":
+                    NumberOfPlayers++;
+                    var player_orange = new Player
+                        {
+                            Name = string.Format("Player {0}", NumberOfPlayers),
+                            ImageUri = new Uri("ms-appx:///Assets/Players/Orange-Monster.png"),
+                            TurnOrder = NumberOfPlayers
+                        };
+
+                    PlayerList.Add(player_orange);
+                    break;
+                case "PurpleMonster":
+                    NumberOfPlayers++;
+                    var player_purple = new Player
+                        {
+                            Name = string.Format("Player {0}", NumberOfPlayers),
+                            ImageUri = new Uri("ms-appx:///Assets/Players/Purple-Monster.png"),
+                            TurnOrder = NumberOfPlayers
+                        };
+
+                    PlayerList.Add(player_purple);
+                    break;
+            }
+        }
+
+        private void GameStart_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Game), PlayerList);
         }
     }
 }
