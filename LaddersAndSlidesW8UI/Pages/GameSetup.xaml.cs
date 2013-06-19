@@ -23,6 +23,8 @@ namespace LaddersAndSlidesW8UI.Pages
     /// </summary>
     public sealed partial class GameSetup : Page
     {
+        public int NumberOfPlayers { get; set; }
+
         public GameSetup()
         {
             this.InitializeComponent();
@@ -35,6 +37,7 @@ namespace LaddersAndSlidesW8UI.Pages
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            NumberOfPlayers = 0;
         }
 
         private void PlayerSelection_OnClick(object sender, RoutedEventArgs e)
@@ -49,7 +52,7 @@ namespace LaddersAndSlidesW8UI.Pages
                     var player1 = new Player
                         {
                             Name = "Player 1",
-                            ImageUri = new Uri("ms-appx:///Assets/Players/Blue-Monster.png"),
+                            ImageUri = new Uri("ms-appx:///Assets/Players/Green-Monster.png"),
                             TurnOrder = 1
                         };
 

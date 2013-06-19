@@ -47,8 +47,6 @@
 
         public void ProcessArrowEvent(Image arrow)
         {
-            //ArrowSpinDuration = _arrowLogic.CalculateArrowSpin();
-
             arrow.Projection = new PlaneProjection { CenterOfRotationY = 0.415, CenterOfRotationX = 0.5, RotationZ = ArrowSpinDuration };
             ArrowSpinDuration *= .98;
 
@@ -78,7 +76,6 @@
 
         public int CalculateNumberOfPlayerMoves(double arrowSpinAngle)
         {
-            return 87;
             if ((arrowSpinAngle >= 0 && arrowSpinAngle <= 40) ||
                 (arrowSpinAngle > 320 && arrowSpinAngle <= 360))
                 return 4;
