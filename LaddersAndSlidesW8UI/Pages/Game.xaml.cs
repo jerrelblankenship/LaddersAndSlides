@@ -214,7 +214,7 @@ namespace LaddersAndSlidesW8UI.Pages
                    (Image)_gameBoard.Children.FirstOrDefault(x => ((Image)x).Name == GameEngine.CurrentPlayer.Name);
         }
 
-        public void RenderSpinner(Canvas gameSpinner, Image arrow)
+        public void RenderSpinner(Grid gameSpinner, Image arrow)
         {
             Canvas.SetTop(arrow, (gameSpinner.ActualHeight / 2) - (arrow.ActualHeight / 2) + (arrow.ActualHeight * .07));
             Canvas.SetLeft(arrow, ((gameSpinner.ActualWidth / 2) - (arrow.ActualWidth / 2)) + (arrow.ActualHeight * .015));

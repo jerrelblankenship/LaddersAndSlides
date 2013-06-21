@@ -136,7 +136,9 @@
     <Content Include="Assets\GameArtifacts\chutesAndLadders2.png" />
     <Content Include="Assets\GameArtifacts\chutesAndLadders3.png" />
     <Content Include="Assets\GameArtifacts\chutesAndLadders4.png" />
-    <Content Include="Assets\GameArtifacts\Spinner.png" />
+    <Content Include="Assets\GameArtifacts\Spinner.scale-100.png" />
+    <Content Include="Assets\GameArtifacts\Spinner.scale-140.png" />
+    <Content Include="Assets\GameArtifacts\Spinner.scale-180.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\Players\Blue-Monster-Selected.png" />
     <Content Include="Assets\Players\Blue-Monster.png" />

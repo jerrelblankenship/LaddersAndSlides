@@ -31,15 +31,12 @@
             </StackPanel>
             
         </Grid>
-        
-        <Canvas Name="_gameSpinner" Grid.Column="0" Grid.Row="1" Tapped="GameSpinner_OnTapped" Margin="75,65,75,65" >
-            <Canvas.Background>
-                <ImageBrush ImageSource="../../Assets/GameArtifacts/Spinner.png"></ImageBrush>
-            </Canvas.Background>
 
+        <Grid Name="_gameSpinner" Grid.Column="0" Grid.Row="1" Tapped="GameSpinner_OnTapped">
+            <Image Source="../../Assets/GameArtifacts/Spinner.png"></Image>
             <Image Name="_arrow" Source="../../Assets/GameArtifacts/Arrow.png" Height="200" Width="80"></Image>
-        </Canvas>
-
+        </Grid>
+        
         <Canvas Grid.Column="1" Grid.Row="1" Name="_gutter">
         </Canvas>
         
