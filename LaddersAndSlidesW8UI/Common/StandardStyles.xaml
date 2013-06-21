@@ -27,6 +27,10 @@
     </ResourceDictionary.ThemeDictionaries>
 
     <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
+    <SolidColorBrush x:Key="BlueMonsterColor">#FF00ACED</SolidColorBrush>
+    <SolidColorBrush x:Key="GreenMonsterColor">#FF3EC546</SolidColorBrush>
+    <SolidColorBrush x:Key="OrangeMonsterColor">#FFF6961D</SolidColorBrush>
+    <SolidColorBrush x:Key="PurpleMonsterColor">#FFD40EE9</SolidColorBrush>
 
     <!-- RichTextBlock styles -->
 
@@ -1416,6 +1420,26 @@
         <Setter Property="FontSize" Value="64"/>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="Foreground" Value="Teal"></Setter>
+    </Style>
+
+    <Style x:Key="GameHeaderTextStyleBlue" TargetType="TextBlock" BasedOn="{StaticResource GameHeaderTextStyle}">
+        <Setter Property="FontSize" Value="76"/>
+        <Setter Property="Foreground" Value="{StaticResource BlueMonsterColor}"></Setter>
+    </Style>
+
+    <Style x:Key="GameHeaderTextStyleGreen" TargetType="TextBlock" BasedOn="{StaticResource GameHeaderTextStyle}">
+        <Setter Property="FontSize" Value="76"/>
+        <Setter Property="Foreground" Value="{StaticResource GreenMonsterColor}"></Setter>
+    </Style>
+
+    <Style x:Key="GameHeaderTextStyleOrange" TargetType="TextBlock" BasedOn="{StaticResource GameHeaderTextStyle}">
+        <Setter Property="FontSize" Value="76"/>
+        <Setter Property="Foreground" Value="{StaticResource OrangeMonsterColor}"></Setter>
+    </Style>
+
+    <Style x:Key="GameHeaderTextStylePurple" TargetType="TextBlock" BasedOn="{StaticResource GameHeaderTextStyle}">
+        <Setter Property="FontSize" Value="76"/>
+        <Setter Property="Foreground" Value="{StaticResource PurpleMonsterColor}"></Setter>
     </Style>
 
     <Style x:Key="DynamicGameHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource PageHeaderTextStyle}">

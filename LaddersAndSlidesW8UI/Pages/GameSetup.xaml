@@ -10,7 +10,7 @@
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="75">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -25,37 +25,33 @@
         <TextBlock Grid.Row="0" Name="SelectPlayerNotification"  Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource GameHeaderTextStyle}">Select Player 1</TextBlock>
 
         <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" 
-                   Name="BlueMonsterSelectedNotification" 
-                   FontSize="96" FontWeight="ExtraBold" Foreground="Red"></TextBlock>
-        
-        <Button Name="BlueMonster" Margin="10" HorizontalAlignment="Center"
+                   Name="BlueMonsterSelectedNotification" Style="{StaticResource GameHeaderTextStyleBlue}"></TextBlock>
+
+        <Button Name="BlueMonster" Margin="2" HorizontalAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0"
                 Grid.Row="2" Grid.Column="0" Click="PlayerSelection_OnClick">
             <Image Source="../../Assets/Players/Blue-Monster.png"></Image>
         </Button>
 
         <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" 
-                   Name="GreenMonsterSelectedNotification" 
-                   FontSize="96" FontWeight="ExtraBold" Foreground="Red"></TextBlock>
-        
-        <Button Name="GreenMonster" Margin="10" HorizontalAlignment="Center"
+                   Name="GreenMonsterSelectedNotification" Style="{StaticResource GameHeaderTextStyleGreen}"></TextBlock>
+
+        <Button Name="GreenMonster" Margin="2" HorizontalAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0"
                 Grid.Row="2" Grid.Column="1" Click="PlayerSelection_OnClick">
             <Image Source="../../Assets/Players/Green-Monster.png"></Image>
         </Button>
 
         <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" 
-                   Name="OrangeMonsterSelectedNotification" 
-                   FontSize="96" FontWeight="ExtraBold" Foreground="Red"></TextBlock>
-        
-        <Button Name="OrangeMonster" Margin="10" HorizontalAlignment="Center"
+                   Name="OrangeMonsterSelectedNotification" Style="{StaticResource GameHeaderTextStyleOrange}"></TextBlock>
+
+        <Button Name="OrangeMonster" Margin="2" HorizontalAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0"
                 Grid.Row="2" Grid.Column="2" Click="PlayerSelection_OnClick">
             <Image Source="../../Assets/Players/Orange-Monster.png"></Image>
         </Button>
 
         <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" 
-                   Name="PurpleMonsterSelectedNotification" 
-                   FontSize="96" FontWeight="ExtraBold" Foreground="Red"></TextBlock>
-        
-        <Button Name="PurpleMonster" Margin="10" HorizontalAlignment="Center"
+                   Name="PurpleMonsterSelectedNotification" Style="{StaticResource GameHeaderTextStylePurple}"></TextBlock>
+
+        <Button Name="PurpleMonster" Margin="2" HorizontalAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0"
                 Grid.Row="2" Grid.Column="3" Click="PlayerSelection_OnClick">
             <Image Source="../../Assets/Players/Purple-Monster.png"></Image>
         </Button>

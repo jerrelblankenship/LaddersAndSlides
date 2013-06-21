@@ -50,37 +50,36 @@ namespace LaddersAndSlidesW8UI.Pages
             button.IsEnabled = false;
 
             var image = new Image();
-            image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Green-Monster-Selected.png") };
-            button.Content = image;
-
+            
             switch (buttonName)
             {
                 case "GreenMonster":
                     AddPlayer("ms-appx:///Assets/Players/Green-Monster.png");
-                    GreenMonsterSelectedNotification.Text = "X";
+                    image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Green-Monster-Selected.png") };
+                    GreenMonsterSelectedNotification.Text = string.Format("Player {0}", NumberOfPlayers);
                     break;
                 case "BlueMonster":
                     AddPlayer("ms-appx:///Assets/Players/Blue-Monster.png");
-                    BlueMonsterSelectedNotification.Text = "X";
+                    image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Blue-Monster-Selected.png") };
+                    BlueMonsterSelectedNotification.Text = string.Format("Player {0}", NumberOfPlayers);
                     break;
                 case "OrangeMonster":
                     AddPlayer("ms-appx:///Assets/Players/Orange-Monster.png");
-                    OrangeMonsterSelectedNotification.Text = "X";
+                    image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Orange-Monster-Selected.png") };
+                    OrangeMonsterSelectedNotification.Text = string.Format("Player {0}", NumberOfPlayers);
                     break;
                 case "PurpleMonster":
                     AddPlayer("ms-appx:///Assets/Players/Purple-Monster.png");
-                    PurpleMonsterSelectedNotification.Text = "X";
+                    image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Purple-Monster-Selected.png") };
+                    PurpleMonsterSelectedNotification.Text = string.Format("Player {0}", NumberOfPlayers);
                     break;
             }
 
-            if (NumberOfPlayers < 4)
-            {
-                SelectPlayerNotification.Text = string.Format("Select Player {0}", NumberOfPlayers + 1);
-            }
-            else
-            {
-                SelectPlayerNotification.Text = "Press Start";
-            }
+            SelectPlayerNotification.Text = NumberOfPlayers < 4 
+                ? string.Format("Select Player {0}", NumberOfPlayers + 1) 
+                : "Press Start";
+
+            button.Content = image;
 
             GameStart.IsEnabled = true;
         }
