@@ -139,6 +139,7 @@
     <Content Include="Assets\GameArtifacts\Spinner.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\Players\Blue-Monster.png" />
+    <Content Include="Assets\Players\Green-Monster-Selected.png" />
     <Content Include="Assets\Players\Green-Monster.png" />
     <Content Include="Assets\Players\Orange-Monster.png" />
     <Content Include="Assets\Players\Purple-Monster.png" />

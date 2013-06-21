@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -48,53 +49,53 @@ namespace LaddersAndSlidesW8UI.Pages
             var buttonName = button.Name;
             button.IsEnabled = false;
 
+            var image = new Image();
+            image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Green-Monster-Selected.png") };
+            button.Content = image;
+
             switch (buttonName)
             {
                 case "GreenMonster":
-                    NumberOfPlayers++;
-                    var player_green = new Player
-                        {
-                            Name = string.Format("Player {0}", NumberOfPlayers),
-                            ImageUri = new Uri("ms-appx:///Assets/Players/Green-Monster.png"),
-                            TurnOrder = NumberOfPlayers
-                        };
-
-                    PlayerList.Add(player_green);
+                    AddPlayer("ms-appx:///Assets/Players/Green-Monster.png");
+                    GreenMonsterSelectedNotification.Text = "X";
                     break;
                 case "BlueMonster":
-                    NumberOfPlayers++;
-                    var player_blue = new Player
-                        {
-                            Name = string.Format("Player {0}", NumberOfPlayers),
-                            ImageUri = new Uri("ms-appx:///Assets/Players/Blue-Monster.png"),
-                            TurnOrder = NumberOfPlayers
-                        };
-
-                    PlayerList.Add(player_blue);
+                    AddPlayer("ms-appx:///Assets/Players/Blue-Monster.png");
+                    BlueMonsterSelectedNotification.Text = "X";
                     break;
                 case "OrangeMonster":
-                    NumberOfPlayers++;
-                    var player_orange = new Player
-                        {
-                            Name = string.Format("Player {0}", NumberOfPlayers),
-                            ImageUri = new Uri("ms-appx:///Assets/Players/Orange-Monster.png"),
-                            TurnOrder = NumberOfPlayers
-                        };
-
-                    PlayerList.Add(player_orange);
+                    AddPlayer("ms-appx:///Assets/Players/Orange-Monster.png");
+                    OrangeMonsterSelectedNotification.Text = "X";
                     break;
                 case "PurpleMonster":
-                    NumberOfPlayers++;
-                    var player_purple = new Player
-                        {
-                            Name = string.Format("Player {0}", NumberOfPlayers),
-                            ImageUri = new Uri("ms-appx:///Assets/Players/Purple-Monster.png"),
-                            TurnOrder = NumberOfPlayers
-                        };
-
-                    PlayerList.Add(player_purple);
+                    AddPlayer("ms-appx:///Assets/Players/Purple-Monster.png");
+                    PurpleMonsterSelectedNotification.Text = "X";
                     break;
             }
+
+            if (NumberOfPlayers < 4)
+            {
+                SelectPlayerNotification.Text = string.Format("Select Player {0}", NumberOfPlayers + 1);
+            }
+            else
+            {
+                SelectPlayerNotification.Text = "Press Start";
+            }
+
+            GameStart.IsEnabled = true;
+        }
+
+        private void AddPlayer(string playerTokenUrl)
+        {
+            NumberOfPlayers++;
+            var player = new Player
+            {
+                Name = string.Format("Player {0}", NumberOfPlayers),
+                ImageUri = new Uri(playerTokenUrl),
+                TurnOrder = NumberOfPlayers
+            };
+
+            PlayerList.Add(player);
         }
 
         private void GameStart_OnClick(object sender, RoutedEventArgs e)
