@@ -1450,6 +1450,22 @@
         <Setter Property="Foreground" Value="SteelBlue"></Setter>
     </Style>
 
+    <Style x:Key="DynamicGameHeaderTextStyleBlue" TargetType="TextBlock" BasedOn="{StaticResource DynamicGameHeaderTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource BlueMonsterColor}"></Setter>
+    </Style>
+
+    <Style x:Key="DynamicGameHeaderTextStyleGreen" TargetType="TextBlock" BasedOn="{StaticResource DynamicGameHeaderTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource GreenMonsterColor}"></Setter>
+    </Style>
+
+    <Style x:Key="DynamicGameHeaderTextStyleOrange" TargetType="TextBlock" BasedOn="{StaticResource DynamicGameHeaderTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource OrangeMonsterColor}"></Setter>
+    </Style>
+
+    <Style x:Key="DynamicGameHeaderTextStylePurple" TargetType="TextBlock" BasedOn="{StaticResource DynamicGameHeaderTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource PurpleMonsterColor}"></Setter>
+    </Style>
+
     <Style x:Key="PageSubheaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource SubheaderTextStyle}">
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="VerticalAlignment" Value="Bottom"/>

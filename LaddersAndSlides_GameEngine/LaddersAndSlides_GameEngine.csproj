@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Player.cs" />
+    <Compile Include="Domain\PlayerColor.cs" />
     <Compile Include="Engine\ArrowLogic.cs" />
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Engine\SpecialMove.cs" />

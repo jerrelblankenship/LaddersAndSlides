@@ -16,6 +16,8 @@
 
         public int SpecialMoveTransportDestination { get; set; }
 
+        public PlayerColor GameTokenColor { get; set; }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;

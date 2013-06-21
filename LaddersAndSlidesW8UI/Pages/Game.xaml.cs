@@ -59,9 +59,34 @@ namespace LaddersAndSlidesW8UI.Pages
             }
 
             GameEngine.GetNextPlayer();
-            _playerNotificationDisplayText.Text = GameEngine.CurrentPlayer.Name;
-            _playerNotificationDisplayImage.Source = new BitmapImage { UriSource = GameEngine.CurrentPlayer.ImageUri };
+            SetupPlayerNotificationArea();
             RenderSpinner(_gameSpinner, _arrow);
+        }
+
+        private void SetupPlayerNotificationArea()
+        {
+            _playerNotificationDisplayText.Text = GameEngine.CurrentPlayer.Name;
+            _playerNotificationDisplayImage.Source = new BitmapImage {UriSource = GameEngine.CurrentPlayer.ImageUri};
+
+            switch (GameEngine.CurrentPlayer.GameTokenColor)
+            {
+                case PlayerColor.Blue:
+                    _playerNotificationDisplayText.Style =
+                        (Style) Application.Current.Resources["DynamicGameHeaderTextStyleBlue"];
+                    break;
+                case PlayerColor.Green:
+                    _playerNotificationDisplayText.Style =
+                        (Style)Application.Current.Resources["DynamicGameHeaderTextStyleGreen"];
+                    break;
+                case PlayerColor.Orange:
+                    _playerNotificationDisplayText.Style =
+                        (Style)Application.Current.Resources["DynamicGameHeaderTextStyleOrange"];
+                    break;
+                case PlayerColor.Purple:
+                    _playerNotificationDisplayText.Style =
+                        (Style)Application.Current.Resources["DynamicGameHeaderTextStylePurple"];
+                    break;
+            }
         }
 
         void TimerTick(object sender, object e)
@@ -84,8 +109,7 @@ namespace LaddersAndSlidesW8UI.Pages
 
                 case GameStateEngine.GetNextPlayer:
                     GameEngine.GetNextPlayer();
-                    _playerNotificationDisplayText.Text = GameEngine.CurrentPlayer.Name;
-                    _playerNotificationDisplayImage.Source = new BitmapImage { UriSource = GameEngine.CurrentPlayer.ImageUri };
+                    SetupPlayerNotificationArea();
                     break;
 
                 case GameStateEngine.PlayerSpecialMoveTransportMoveEvent:

@@ -54,22 +54,22 @@ namespace LaddersAndSlidesW8UI.Pages
             switch (buttonName)
             {
                 case "GreenMonster":
-                    AddPlayer("ms-appx:///Assets/Players/Green-Monster.png");
+                    AddPlayer("ms-appx:///Assets/Players/Green-Monster.png", PlayerColor.Green);
                     image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Green-Monster-Selected.png") };
                     GreenMonsterSelectedNotification.Text = string.Format("Player {0}", NumberOfPlayers);
                     break;
                 case "BlueMonster":
-                    AddPlayer("ms-appx:///Assets/Players/Blue-Monster.png");
+                    AddPlayer("ms-appx:///Assets/Players/Blue-Monster.png", PlayerColor.Blue);
                     image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Blue-Monster-Selected.png") };
                     BlueMonsterSelectedNotification.Text = string.Format("Player {0}", NumberOfPlayers);
                     break;
                 case "OrangeMonster":
-                    AddPlayer("ms-appx:///Assets/Players/Orange-Monster.png");
+                    AddPlayer("ms-appx:///Assets/Players/Orange-Monster.png", PlayerColor.Orange);
                     image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Orange-Monster-Selected.png") };
                     OrangeMonsterSelectedNotification.Text = string.Format("Player {0}", NumberOfPlayers);
                     break;
                 case "PurpleMonster":
-                    AddPlayer("ms-appx:///Assets/Players/Purple-Monster.png");
+                    AddPlayer("ms-appx:///Assets/Players/Purple-Monster.png", PlayerColor.Purple);
                     image.Source = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Players/Purple-Monster-Selected.png") };
                     PurpleMonsterSelectedNotification.Text = string.Format("Player {0}", NumberOfPlayers);
                     break;
@@ -84,14 +84,15 @@ namespace LaddersAndSlidesW8UI.Pages
             GameStart.IsEnabled = true;
         }
 
-        private void AddPlayer(string playerTokenUrl)
+        private void AddPlayer(string playerTokenUrl, PlayerColor playerColor)
         {
             NumberOfPlayers++;
             var player = new Player
             {
                 Name = string.Format("Player {0}", NumberOfPlayers),
                 ImageUri = new Uri(playerTokenUrl),
-                TurnOrder = NumberOfPlayers
+                TurnOrder = NumberOfPlayers,
+                GameTokenColor = playerColor
             };
 
             PlayerList.Add(player);
