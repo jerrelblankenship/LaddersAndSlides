@@ -47,7 +47,7 @@
 
         public void ProcessArrowEvent(Image arrow)
         {
-            arrow.Projection = new PlaneProjection { CenterOfRotationY = 0.415, CenterOfRotationX = 0.5, RotationZ = ArrowSpinDuration };
+            arrow.Projection = new PlaneProjection { CenterOfRotationY = 0.5, CenterOfRotationX = 0.5, RotationZ = ArrowSpinDuration };
             ArrowSpinDuration *= .98;
 
             if (RandomNumberGenerator.NextDouble() < .05 && ArrowSpinDuration < 360)

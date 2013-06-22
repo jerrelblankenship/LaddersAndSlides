@@ -131,7 +131,9 @@
     <None Include="LaddersAndSlidesW8UI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\GameArtifacts\Arrow.png" />
+    <Content Include="Assets\GameArtifacts\Arrow.scale-100.png" />
+    <Content Include="Assets\GameArtifacts\Arrow.scale-140.png" />
+    <Content Include="Assets\GameArtifacts\Arrow.scale-180.png" />
     <Content Include="Assets\GameArtifacts\chutesAndLadders.png" />
     <Content Include="Assets\GameArtifacts\chutesAndLadders2.png" />
     <Content Include="Assets\GameArtifacts\chutesAndLadders3.png" />
