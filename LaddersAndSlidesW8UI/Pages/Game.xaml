@@ -24,17 +24,20 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             
-            <TextBlock Grid.Row="0" Style="{StaticResource GameHeaderTextStyle}">Current Player:</TextBlock>
+			<StackPanel Grid.Row="0">
+				<TextBlock Style="{StaticResource GameHeaderTextStyle}" VerticalAlignment="Center" Margin="0,45,30,40">Current Player:</TextBlock>
+				<TextBlock Style="{StaticResource DynamicGameHeaderTextStyle}" Name="_playerNotificationDisplayText" VerticalAlignment="Center">Player 1</TextBlock>
+			</StackPanel>
+            
             <StackPanel Grid.Row="1">
-                <TextBlock Style="{StaticResource DynamicGameHeaderTextStyle}" Name="_playerNotificationDisplayText">Player 1</TextBlock>
-                <Image Name="_playerNotificationDisplayImage" Source="../../Assets/Players/Green-Monster.png" Width="125" Height="125"/>
+                <Image Name="_playerNotificationDisplayImage" Source="../../Assets/Players/Green-Monster.png" Width="175" Height="175"/>
             </StackPanel>
             
         </Grid>
 
         <Grid Name="_gameSpinner" Grid.Column="0" Grid.Row="1" Tapped="GameSpinner_OnTapped">
-            <Image Source="../../Assets/GameArtifacts/Spinner.png" Margin="15"></Image>
-            <Image Name="_arrow" Source="../../Assets/GameArtifacts/Arrow.png" Margin="75"></Image>
+            <Image Source="../../Assets/GameArtifacts/Spinner.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"></Image>
+            <Image Name="_arrow" Source="../../Assets/GameArtifacts/Arrow.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80"></Image>
         </Grid>
         
         <Canvas Grid.Column="1" Grid.Row="1" Name="_gutter">
