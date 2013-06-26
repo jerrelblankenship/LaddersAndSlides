@@ -48,14 +48,14 @@ namespace LaddersAndSlidesW8UI.Pages
 
         void GameLoaded(object sender, RoutedEventArgs e)
         {
-            var previousPlayerTokenCombinedHeight = 0.0;
-            
+            var gutterRows = 3;
+
             foreach (var image in GameEngine.Players.Select(player => GameEngine.CreatePlayerToken(player)))
             {
                 _gutter.Children.Add(image);
 
-                previousPlayerTokenCombinedHeight += image.ActualHeight;
-                Canvas.SetTop(image, _gutter.ActualHeight - (previousPlayerTokenCombinedHeight  + 1));
+                Grid.SetRow(image, gutterRows);
+                gutterRows--;
             }
 
             GameEngine.GetNextPlayer();

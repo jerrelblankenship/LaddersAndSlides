@@ -110,7 +110,7 @@
             }
         }
 
-        public void ProcessPlayerEvent(Image currentPlayerToken, Canvas gutter, Grid gameBoard)
+        public void ProcessPlayerEvent(Image currentPlayerToken, Grid gutter, Grid gameBoard)
         {
             if (DateTime.Now.Subtract(WaitStart).Milliseconds > 100)
             {
