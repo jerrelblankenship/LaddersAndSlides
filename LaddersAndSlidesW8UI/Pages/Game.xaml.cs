@@ -60,7 +60,6 @@ namespace LaddersAndSlidesW8UI.Pages
 
             GameEngine.GetNextPlayer();
             SetupPlayerNotificationArea();
-            RenderSpinner(_gameSpinner, _arrow);
         }
 
         private void SetupPlayerNotificationArea()
@@ -212,12 +211,6 @@ namespace LaddersAndSlidesW8UI.Pages
         {
             return (Image) _gutter.Children.FirstOrDefault(x => ((Image) x).Name == GameEngine.CurrentPlayer.Name) ??
                    (Image)_gameBoard.Children.FirstOrDefault(x => ((Image)x).Name == GameEngine.CurrentPlayer.Name);
-        }
-
-        public void RenderSpinner(Grid gameSpinner, Image arrow)
-        {
-            //Canvas.SetTop(arrow, (gameSpinner.ActualHeight / 2) - (arrow.ActualHeight / 2) + (arrow.ActualHeight * .07));
-            //Canvas.SetLeft(arrow, ((gameSpinner.ActualWidth / 2) - (arrow.ActualWidth / 2)) + (arrow.ActualHeight * .015));
         }
 
         /// <summary>
