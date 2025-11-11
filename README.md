@@ -17,9 +17,9 @@ This is a modernized version of the classic Windows 8 game, converted from C#/XA
 ## Technology Stack
 
 - **TypeScript**: Type-safe game logic and UI code
-- **Node.js**: Server runtime
+- **Bun**: Fast all-in-one JavaScript runtime and package manager
 - **Express**: Web server for serving static files
-- **Jest**: Unit testing framework
+- **Bun Test**: Built-in testing framework
 - **HTML/CSS**: Modern web UI (replacing XAML)
 
 ## Project Structure
@@ -47,30 +47,39 @@ LaddersAndSlides/
 ├── dist/                 # Compiled output
 ├── package.json
 ├── tsconfig.json
-└── jest.config.js
+└── bunfig.toml           # Bun configuration
 ```
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- [Bun](https://bun.sh) 1.0+
+
+**Install Bun:**
+```bash
+# macOS, Linux, and WSL
+curl -fsSL https://bun.sh/install | bash
+
+# Or use npm if you have Node.js
+npm install -g bun
+```
 
 ### Installation
 
 1. Install dependencies:
 ```bash
-npm install
+bun install
 ```
 
 2. Build the project:
 ```bash
-npm run build
+bun run build
 ```
 
 3. Start the server:
 ```bash
-npm start
+bun start
 ```
 
 4. Open your browser and navigate to:
@@ -84,20 +93,20 @@ http://localhost:3000
 
 To build with automatic recompilation on changes:
 ```bash
-npm run watch
+bun run watch
 ```
 
 ### Run Tests
 
 ```bash
-npm test
+bun test
 ```
 
 ### Development Mode
 
 Build and start the server:
 ```bash
-npm run dev
+bun run dev
 ```
 
 ## Game Rules
@@ -139,7 +148,8 @@ This application was converted from the original Windows 8 C#/XAML version to mo
 - **C# → TypeScript**: All game logic converted to TypeScript
 - **XAML → HTML/CSS**: UI rebuilt with modern web standards
 - **Windows Runtime → Web APIs**: Platform-specific code removed
-- **MSTest → Jest**: Unit tests converted to Jest
+- **MSTest → Bun Test**: Unit tests converted to Bun's built-in test runner
+- **Runtime → Bun**: Using Bun for fast execution and package management
 - **Assets Reused**: All original game graphics preserved
 
 ## Architecture
@@ -162,7 +172,7 @@ The project includes comprehensive unit tests covering:
 
 Run tests with:
 ```bash
-npm test
+bun test
 ```
 
 ## License
