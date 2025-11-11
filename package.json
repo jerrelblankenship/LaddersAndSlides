@@ -1,0 +1,33 @@
+{
+  "name": "ladders-and-slides",
+  "version": "2.0.0",
+  "description": "Modern TypeScript/Node.js implementation of the classic Chutes and Ladders board game",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "mkdir -p dist/assets && cp -r src/assets/* dist/assets/",
+    "dev": "npm run build && node dist/server.js",
+    "start": "node dist/server.js",
+    "test": "jest",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "game",
+    "board-game",
+    "chutes-and-ladders",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.6",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "@types/express": "^4.17.21"
+  }
+}

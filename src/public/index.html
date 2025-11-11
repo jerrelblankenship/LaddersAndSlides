@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ladders & Slides</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Entry/Splash Screen -->
+        <div id="entry-screen" class="screen active">
+            <div class="entry-content">
+                <h1 class="game-title">Ladders & Slides</h1>
+                <p class="subtitle">A Classic Board Game Adventure</p>
+                <button id="start-game-btn" class="btn btn-primary">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Game Setup Screen -->
+        <div id="setup-screen" class="screen">
+            <div class="setup-content">
+                <h2>Select Players</h2>
+                <p class="instructions">Choose 2-4 players to start the game</p>
+
+                <div class="player-selection">
+                    <div class="player-card" data-color="Blue">
+                        <img src="../assets/Players/Blue-Monster.png" alt="Blue Monster">
+                        <div class="player-name">Blue Monster</div>
+                        <input type="checkbox" class="player-checkbox" id="player-blue">
+                    </div>
+
+                    <div class="player-card" data-color="Green">
+                        <img src="../assets/Players/Green-Monster.png" alt="Green Monster">
+                        <div class="player-name">Green Monster</div>
+                        <input type="checkbox" class="player-checkbox" id="player-green">
+                    </div>
+
+                    <div class="player-card" data-color="Orange">
+                        <img src="../assets/Players/Orange-Monster.png" alt="Orange Monster">
+                        <div class="player-name">Orange Monster</div>
+                        <input type="checkbox" class="player-checkbox" id="player-orange">
+                    </div>
+
+                    <div class="player-card" data-color="Purple">
+                        <img src="../assets/Players/Purple-Monster.png" alt="Purple Monster">
+                        <div class="player-name">Purple Monster</div>
+                        <input type="checkbox" class="player-checkbox" id="player-purple">
+                    </div>
+                </div>
+
+                <div class="setup-actions">
+                    <button id="back-to-entry-btn" class="btn btn-secondary">Back</button>
+                    <button id="start-playing-btn" class="btn btn-primary" disabled>Start Playing</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-container">
+                <div class="game-header">
+                    <h2>Ladders & Slides</h2>
+                    <div id="current-player-indicator" class="current-player">
+                        Current Player: <span id="current-player-name">-</span>
+                    </div>
+                </div>
+
+                <div class="game-content">
+                    <!-- Left: Spinner and waiting area -->
+                    <div class="game-sidebar">
+                        <div class="spinner-container">
+                            <img id="spinner" src="../assets/GameArtifacts/Spinner.png" alt="Spinner">
+                            <img id="arrow" src="../assets/GameArtifacts/Arrow.png" alt="Arrow">
+                        </div>
+
+                        <button id="spin-btn" class="btn btn-primary btn-large">Spin!</button>
+
+                        <div id="moves-display" class="moves-display">
+                            Moves: <span id="moves-count">0</span>
+                        </div>
+
+                        <div id="gutter" class="gutter">
+                            <!-- Player tokens waiting to start appear here -->
+                        </div>
+                    </div>
+
+                    <!-- Center: Game Board -->
+                    <div class="game-board-container">
+                        <img src="../assets/GameArtifacts/chutesAndLadders3.png" alt="Game Board" class="board-image">
+                        <div id="game-board" class="game-board">
+                            <!-- 10x10 grid for player tokens -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Winner Screen -->
+        <div id="winner-screen" class="screen">
+            <div class="winner-content">
+                <h1>🎉 Winner! 🎉</h1>
+                <div id="winner-info">
+                    <img id="winner-image" src="" alt="Winner">
+                    <h2 id="winner-name">-</h2>
+                </div>
+                <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../../dist/ui/GameController.js"></script>
+</body>
+</html>
