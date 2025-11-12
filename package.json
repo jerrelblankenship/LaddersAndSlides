@@ -8,7 +8,7 @@
     "build": "tsc && bun run copy-assets",
     "copy-assets": "mkdir -p dist/assets && cp -r src/assets/* dist/assets/",
     "dev": "bun run build && bun run start",
-    "start": "bun run dist/server.ts",
+    "start": "bun run dist/server.js",
     "test": "bun test",
     "watch": "tsc --watch"
   },

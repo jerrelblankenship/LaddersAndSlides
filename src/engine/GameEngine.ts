@@ -1,6 +1,6 @@
-import { Player } from '../domain/Player';
-import { SpecialMove } from './SpecialMove';
-import { GameStateEngine } from './GameStateEngine';
+import { Player } from '../domain/Player.js';
+import { SpecialMove } from './SpecialMove.js';
+import { GameStateEngine } from './GameStateEngine.js';
 
 export class GameEngine {
   players: Player[] = [];

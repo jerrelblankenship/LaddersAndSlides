@@ -1,7 +1,7 @@
-import { GameEngine } from '../engine/GameEngine';
-import { Player } from '../domain/Player';
-import { PlayerColor } from '../domain/PlayerColor';
-import { GameStateEngine } from '../engine/GameStateEngine';
+import { GameEngine } from '../engine/GameEngine.js';
+import { Player } from '../domain/Player.js';
+import { PlayerColor } from '../domain/PlayerColor.js';
+import { GameStateEngine } from '../engine/GameStateEngine.js';
 
 export class GameController {
   private gameEngine: GameEngine;
